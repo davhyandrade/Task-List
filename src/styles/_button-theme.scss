@@ -1,0 +1,11 @@
+.btn-theme {
+    margin-left: 5px;
+    width: 40px;
+    padding: 7px;
+    border-radius: 5px;
+
+    &:hover {
+        transition: 1s;
+        background: rgba(128, 128, 128, 0.1);
+    }
+}

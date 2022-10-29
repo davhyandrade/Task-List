@@ -1,0 +1,456 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  background-color: var(--bg-color);
+}
+body #__next {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+body #__next section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section-tasks {
+  width: 100%;
+  height: 820px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.section-tasks .add-tasks {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 180px;
+  border-bottom: 1px solid #edeff0;
+}
+.section-tasks .add-tasks button {
+  filter: drop-shadow(0px 0px 50px rgb(230, 230, 230));
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+  cursor: pointer;
+  padding: 12px 40px;
+  color: rgb(0, 154, 196);
+  font-weight: bold;
+  border-radius: 30px;
+  border: none;
+  font-size: 1.5rem;
+  font-family: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  border: 2px solid rgb(0, 154, 196);
+  background-color: transparent;
+  border: 2px solid rgb(0, 154, 196);
+}
+.section-tasks .add-tasks button .img-button-add {
+  margin-right: 10px;
+  width: 22px;
+}
+.section-tasks .add-tasks button:hover {
+  transition: 1s;
+  background-color: rgb(0, 154, 196);
+  color: white;
+}
+.section-tasks .add-tasks button:hover .img-button-add {
+  transition: 1s;
+  filter: brightness(0) grayscale(1) invert(1);
+}
+.section-tasks .add-tasks button:active {
+  transition: 0.1s;
+  background-color: transparent;
+  color: rgb(0, 154, 196);
+}
+.section-tasks .add-tasks button:active .img-button-add {
+  transition: 0.1s;
+  filter: none;
+}
+.section-tasks .add-tasks p:nth-child(2) {
+  margin-top: 20px;
+  font-size: 1rem;
+  color: gray;
+}
+.section-tasks .add-tasks p:nth-child(2) span {
+  font-weight: bolder;
+}
+.section-tasks .field-tasks {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 60px;
+  height: 450px;
+  filter: drop-shadow(0px 0px 3px rgb(235, 235, 235));
+}
+.section-tasks .field-tasks .header-tasks {
+  width: 100%;
+  height: 30px;
+  border-bottom: 1px solid rgb(229, 229, 229);
+  background: white;
+}
+.section-tasks .field-tasks .body-tasks {
+  width: 100%;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  z-index: 1;
+  background: white;
+}
+.section-tasks .field-tasks .body-tasks details {
+  width: 100%;
+  background-color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: rgb(157, 157, 157);
+  z-index: 2;
+}
+.section-tasks .field-tasks .body-tasks details[open] {
+  transition: 1s;
+  color: #333;
+}
+.section-tasks .field-tasks .body-tasks details[open] summary {
+  border-left: 6px solid #333;
+  background: rgb(242, 242, 242);
+}
+.section-tasks .field-tasks .body-tasks details[open] .description-tasks {
+  background: rgb(246, 246, 246);
+}
+.section-tasks .field-tasks .body-tasks details .concluded {
+  border-left: 6px solid rgb(0, 154, 196);
+  text-decoration: line-through;
+}
+.section-tasks .field-tasks .body-tasks details summary {
+  padding: 20px;
+  min-height: 65px;
+  width: 100%;
+  background: rgba(245, 245, 245, 0.2);
+  border: 1px solid rgb(229, 229, 229);
+  border-top: none;
+  border-left: 6px solid rgb(157, 157, 157);
+}
+.section-tasks .field-tasks .body-tasks details summary:hover {
+  transition: 1s;
+  color: #333;
+  background: linear-gradient(280deg, #f0f0f0, transparent);
+  border: 1px solid #333;
+  border-left: 6px solid #333;
+}
+.section-tasks .field-tasks .body-tasks details .description-tasks {
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  padding: 20px 30px;
+  line-height: 20px;
+  border: 1px solid rgb(229, 229, 229);
+}
+.section-tasks > p {
+  margin-top: 40px;
+  font-size: 0.85rem;
+  color: rgb(168, 168, 168);
+  width: 55%;
+  text-align: center;
+}
+
+.home-tasks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 8vh;
+  width: 100%;
+}
+.home-tasks h1 {
+  font-family: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  text-align: center;
+  color: #454545;
+  font-size: 4rem;
+  line-height: 70px;
+}
+.home-tasks > span {
+  text-align: center;
+  color: #454545;
+  font-size: 2.8rem;
+  font-family: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  line-height: 50px;
+  width: 30%;
+  font-weight: normal;
+  margin-bottom: 50px;
+}
+.home-tasks .add-tasks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 50px;
+  width: 100%;
+  height: 250px;
+  border-top: 1px solid #edeff0;
+  border-bottom: 1px solid #edeff0;
+}
+.home-tasks .add-tasks button {
+  filter: drop-shadow(0px 0px 50px rgb(230, 230, 230));
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 12px 40px;
+  color: rgb(0, 154, 196);
+  font-weight: bold;
+  border-radius: 30px;
+  border: none;
+  font-size: 1.5rem;
+  font-family: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  border: 2px solid rgb(0, 154, 196);
+  background-color: transparent;
+  border: 2px solid rgb(0, 154, 196);
+}
+.home-tasks .add-tasks button .img-button-add {
+  margin-right: 10px;
+  width: 22px;
+}
+.home-tasks .add-tasks button:hover {
+  transition: 1s;
+  background-color: rgb(0, 154, 196);
+  color: white;
+}
+.home-tasks .add-tasks button:hover .img-button-add {
+  transition: 1s;
+  filter: brightness(0) grayscale(1) invert(1);
+}
+.home-tasks .add-tasks button:active {
+  transition: 0.1s;
+  background-color: transparent;
+  color: rgb(0, 154, 196);
+}
+.home-tasks .add-tasks button:active .img-button-add {
+  transition: 0.1s;
+  filter: none;
+}
+.home-tasks .add-tasks p:nth-child(2) {
+  margin-top: 20px;
+  font-size: 1rem;
+  color: gray;
+}
+.home-tasks .add-tasks p:nth-child(2) span {
+  font-weight: bolder;
+}
+.home-tasks .add-tasks p:nth-child(3) {
+  width: 23%;
+  margin-top: 10px;
+  font-size: 0.6rem;
+  color: rgb(199, 199, 199);
+  text-align: center;
+}
+.home-tasks .add-tasks p:nth-child(3) span {
+  font-weight: bolder;
+}
+
+.menu {
+  width: 100%;
+  height: 70px;
+  background: var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(0px 0px 2px rgb(235, 235, 235));
+}
+.menu .position {
+  width: 85%;
+  display: flex;
+  justify-content: space-between;
+}
+.menu .position hr {
+  background: #edeff0;
+  width: 1px;
+  height: 45px;
+  margin: 0 10px 0 20px;
+  border: none;
+  border-radius: 15px;
+}
+.menu .position > div {
+  display: flex;
+  align-items: center;
+}
+.menu .position > div a {
+  text-decoration: none;
+}
+.menu .position > div a:nth-child(1) {
+  font-size: 1rem;
+  color: rgb(101, 101, 101);
+  margin-right: 35px;
+}
+.menu .position > div a:nth-child(1):hover {
+  transition: 1s;
+  color: rgb(0, 154, 196);
+}
+.menu .position > div a:nth-child(2) {
+  padding: 12px 30px;
+  border-radius: 25px;
+  background-color: #edf0f2;
+  font-size: 17px;
+  color: #333;
+}
+.menu .position > div a:nth-child(2):hover {
+  transition: 1s;
+  background-color: #e5e5e5;
+}
+.menu .position > div a:nth-child(2):active {
+  transition: 0.1s;
+  background-color: #c7c7c7;
+}
+
+.btn-theme {
+  margin-left: 5px;
+  width: 40px;
+  padding: 7px;
+  border-radius: 5px;
+}
+.btn-theme:hover {
+  transition: 1s;
+  background: rgba(128, 128, 128, 0.1);
+}
+
+footer {
+  width: 100%;
+}
+footer > div:nth-child(1) {
+  height: 450px;
+  background: #f7f9fa;
+  border-top: 1px solid #edeff0;
+  display: flex;
+  justify-content: flex-start;
+}
+footer > div:nth-child(1) .position {
+  display: flex;
+  justify-content: space-between;
+  width: 35%;
+  margin-top: 80px;
+  margin-left: 10%;
+  position: relative;
+}
+footer > div:nth-child(1) .position h1 {
+  font-weight: normal;
+  color: #4c616c;
+  font-size: 1.5rem;
+  margin-bottom: 40px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+footer > div:nth-child(1) .position > div {
+  display: flex;
+  flex-direction: column;
+  margin-top: 80px;
+}
+footer > div:nth-child(1) .position > div a {
+  text-decoration: none;
+  margin-bottom: 30px;
+  color: gray;
+  font-size: 1.1rem;
+}
+footer > div:nth-child(1) .position > div a:hover {
+  transition: 1s;
+  text-decoration: underline;
+  color: #333;
+}
+footer > div:nth-child(1) .position > div a:active {
+  transition: 0.1s;
+  opacity: 20%;
+}
+footer > div:nth-child(2) {
+  width: 100%;
+  height: 250px;
+  background: url(https://i.postimg.cc/qq9VCk0M/footer.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7f9fa;
+}
+footer > div:nth-child(2) > div:nth-child(1) {
+  display: flex;
+}
+footer > div:nth-child(2) > div:nth-child(1) a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.1rem;
+  opacity: 70%;
+  cursor: pointer;
+}
+footer > div:nth-child(2) > div:nth-child(1) a:hover {
+  transition: 1s;
+  text-decoration: underline;
+  opacity: 100;
+}
+footer > div:nth-child(2) > div:nth-child(1) a:active {
+  transition: 0.1s;
+  opacity: 20%;
+}
+footer > div:nth-child(2) > div:nth-child(1) a:nth-child(2) {
+  margin-left: 30px;
+}
+footer > div:nth-child(2) > div:nth-child(2) {
+  display: flex;
+  justify-content: space-between;
+  width: 10%;
+  margin: 30px 0;
+}
+footer > div:nth-child(2) > div:nth-child(2) img {
+  width: 35px;
+  cursor: pointer;
+  opacity: 70%;
+}
+footer > div:nth-child(2) > div:nth-child(2) img:hover {
+  transition: 1s;
+  opacity: 100;
+}
+footer > div:nth-child(2) > div:nth-child(2) img:active {
+  transition: 0.1s;
+  opacity: 20%;
+}
+footer > div:nth-child(2) p {
+  font-size: 1rem;
+  color: white;
+  letter-spacing: 1px;
+  font-family: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  opacity: 70%;
+}
+footer > div:nth-child(2) p span {
+  font-weight: bolder;
+}
+
+.field-info {
+  width: 100%;
+  height: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-color);
+}
+.field-info .position {
+  width: 50%;
+  font-family: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  color: gray;
+  font-size: 1.1rem;
+  line-height: 30px;
+  margin-bottom: 100px;
+}/*# sourceMappingURL=globals.css.map */
