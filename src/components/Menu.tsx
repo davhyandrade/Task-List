@@ -27,15 +27,16 @@ const GlobalStyles = createGlobalStyle<IProps>`
           --color-drop-shadow: rgba(128, 128, 128, 0.1);
           --color-gradient-primary: #f0f0f0;
           --color-gradient-secondary: transparent;
+          --color-summary-tasks: rgba(245, 245, 245, 0.15);
       }`
       : `:root {
-          --bg-color: #202124;
-          --bg-panel: #292a2d;
-          --bg-panel-secondary: #292a2d;
-          --bg-panel-third: #323336;
-          --bg-panel-hover: #38393c;
-          --bg-tasks: #333437;
-          --bg-tasks-title: #2a2b2e;
+          --bg-color: #10151b;
+          --bg-panel: #20262e;
+          --bg-panel-secondary: #161b22;
+          --bg-panel-third: #2a323b;
+          --bg-panel-hover: #323b44;
+          --bg-tasks: #232A34;
+          --bg-tasks-title: #29313b;
           --color-text: #b8b8b8;
           --color-headings: white;
           --color-primary: rgb(138, 180, 248);
@@ -43,8 +44,9 @@ const GlobalStyles = createGlobalStyle<IProps>`
           --color-border: rgb(255 255 255 / 10%);
           --color-tasks: white;
           --color-drop-shadow: rgba(0, 0, 0, 0.40);
-          --color-gradient-primary: #343538;
-          --color-gradient-secondary: #404144;
+          --color-gradient-primary: #13181e;
+          --color-gradient-secondary: #222830;
+          --color-summary-tasks: #191e25;
       }
       
       #button-add {
@@ -68,7 +70,7 @@ const GlobalStyles = createGlobalStyle<IProps>`
       }
       
       footer  > div:nth-child(2) {
-        background-image: url(https://i.postimg.cc/J4PsTtnJ/footer2.png);
+        filter: saturate(0.5) opacity(0.5);
       }`}
   `;
 
@@ -106,7 +108,7 @@ export default function Menu() {
       setImageTheme(images.imageLua);
       setIsActiveThemeDarkOrLight('dark');
     }
-  });
+  }, [images.imageLua]);
 
   return (
     <>

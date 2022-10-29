@@ -7,7 +7,7 @@ import InfoField from '../components/InfoField';
 
 export async function getStaticProps() {
   let data;
-  let maxTasks = 5;
+  let maxTasks = 0;
 
   await axios
     .get(`https://jsonplaceholder.typicode.com/posts/?_limit=${maxTasks}`)

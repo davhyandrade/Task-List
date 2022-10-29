@@ -3,7 +3,7 @@ export default function Info() {
     <>
       <div className="field-speaks">
         <div className="position">
-          <h1>"O TaskList permite que as coisas sejam tão simples ou complexas quanto você quiser" <br /> <span>– Davhy Andrade</span></h1>
+          <h1>&ldquo;O TaskList permite que as coisas sejam tão simples ou complexas quanto você quiser&rdquo; <br /> <span>– Davhy Andrade</span></h1>
         </div>
       </div>
       <div className="field-info">

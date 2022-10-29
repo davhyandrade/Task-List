@@ -5,7 +5,7 @@ export default function HomeTasks() {
     <div className="home-tasks">
       <h1>Entre na sua conta</h1>
       <span>para salvar ou acessar suas Tarefas</span>
-      <Image src="https://i.postimg.cc/8CCJ3pKF/icone-task-list.png" width={150} height={100} />
+      <Image src="https://i.postimg.cc/8CCJ3pKF/icone-task-list.png" alt='logo tasklist' width={150} height={100} />
       <div className="add-tasks">
         <button id="button-add" translate="no">
           <img className="img-button-add" src="https://i.postimg.cc/jqQj5YtX/vector-add.png" alt="Vetor Adicionar" />
