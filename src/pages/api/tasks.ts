@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { connectDatabase } from '../../utils/database';
-import Tasks from '../../models/Tasks';
 const mongoose = require('mongoose');
 
 export default async function handler(request: NextApiRequest, response: NextApiResponse) {
@@ -11,8 +10,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
   switch (method) {
     case 'GET':
       try {
-        const tasks = await Tasks.find();
-        response.status(200).json({tasks});
+        response.status(200).json({});
       } catch (error) {
         response.status(500).json(error);
       }
@@ -21,8 +19,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
       break;
     case 'POST':
       try {
-        const tasks = await Tasks.create(request.body);
-        response.status(200).json(tasks);
+        response.status(200).json({});
       } catch (error) {
         response.status(500).json(error);
       }

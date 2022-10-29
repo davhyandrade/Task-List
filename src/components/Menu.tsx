@@ -28,6 +28,7 @@ const GlobalStyles = createGlobalStyle<IProps>`
           --color-gradient-primary: #f0f0f0;
           --color-gradient-secondary: transparent;
           --color-summary-tasks: rgba(245, 245, 245, 0.15);
+          --color: white;
       }`
       : `:root {
           --bg-color: #10151b;
@@ -47,6 +48,7 @@ const GlobalStyles = createGlobalStyle<IProps>`
           --color-gradient-primary: #13181e;
           --color-gradient-secondary: #222830;
           --color-summary-tasks: #191e25;
+          --color: #10151b;
       }
       
       #button-add {

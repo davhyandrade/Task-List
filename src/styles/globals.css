@@ -544,4 +544,49 @@ footer > div:nth-child(2) p span {
 .field-info .position .field > div p > span {
   font-weight: bold;
   font-size: 1.1rem;
+}
+
+.not-found {
+  width: 100%;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.not-found h1 {
+  font-size: 4rem;
+  color: var(--color-primary);
+}
+.not-found span {
+  font-size: 2rem;
+  color: var(--color-headings);
+  margin-top: 30px;
+}
+.not-found span span {
+  font-weight: bolder;
+  font-size: 2.1rem;
+}
+.not-found button {
+  width: 300px;
+  padding: 12px 30px;
+  border-radius: 10px;
+  margin-top: 20px;
+  background: var(--color-primary);
+  cursor: pointer;
+  color: var(--color);
+  font-size: 1rem;
+  font-weight: bolder;
+  border: 3px solid var(--color-primary);
+  margin-bottom: 15vh;
+}
+.not-found button:hover {
+  transition: 1s;
+  background: transparent;
+  color: var(--color-primary);
+}
+.not-found button:active {
+  transition: 0.1s;
+  background: var(--color-primary);
+  color: var(--color);
 }/*# sourceMappingURL=globals.css.map */
