@@ -8,7 +8,7 @@ export default function Tasks({ data }: any) {
   return (
     <section className="section-tasks">
       <div className="add-tasks">
-        <button translate="no">
+        <button id="button-add" translate="no">
           <img className="img-button-add" src="https://i.postimg.cc/jqQj5YtX/vector-add.png" alt="Vetor Adicionar" />
           Adicionar Task
         </button>

@@ -1,0 +1,111 @@
+.field-speaks {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-color);
+  border-bottom: 1px solid var(--color-border);
+
+  .position {
+    width: 55%;
+    font-family: Poppins,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+
+    h1 {
+      font-size: 2.5rem;
+      color: var(--color-headings);
+      text-align: center;
+      line-height: 55px;
+      width: 80%;
+      margin: 0 auto;
+
+      span {
+        font-weight: normal;
+        font-size: 2rem;
+      }
+    }
+  }
+}
+
+.field-info {
+  width: 100%;
+  height: 750px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-color);
+
+  .position {
+    width: 55%;
+    font-family: Poppins,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+    color: var(--color-text);
+    font-size: 1.15rem;
+    line-height: 30px;
+  
+    > span {
+      font-size: 2rem;
+      color: var(--color-headings) ;  
+    }
+
+    p {
+      margin-bottom: 10px;
+      opacity: 80%;
+
+      > span {
+        font-weight: bold;
+        font-size: 1.3rem;
+      }
+    }
+
+    p:nth-child(4) {
+      margin-bottom: 10px;
+    }
+
+    > div {
+      display: flex;
+    }
+
+    .field {
+      display: flex;
+      margin-top: 30px;
+      margin-bottom: 40px;
+      width: 50%;
+
+      img {
+        width: 55px;
+        height: 55px;
+      }
+
+      &:nth-child(3) {
+        width: 100%;
+
+        > div {
+          width: 70%;
+        }
+      } 
+
+      > div {
+        margin-left: 20px;
+        width: 70%;
+
+        h1 {
+          font-size: 1.4rem;
+          color: var(--color-headings);
+          margin-bottom: 5px;
+        }
+
+        p {
+          font-size: 1.1rem;
+          color: var(--color-text);
+          opacity: 50%;
+          line-height: 25px;
+
+          > span {
+            font-weight: bold;
+            font-size: 1.1rem;
+          }
+        }
+      }
+    }
+  }
+}
