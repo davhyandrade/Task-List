@@ -30,7 +30,7 @@ export default function Tasks({ data }: any) {
           {isAuth ? (
             data.map((value: ITasks) => {
               return (
-                <details>
+                <details key={value.id}>
                   <summary>{value.title}</summary>
                   <div className="description-tasks">
                     <p>{value.body}</p>
