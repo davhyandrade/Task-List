@@ -73,6 +73,10 @@ const GlobalStyles = createGlobalStyle<IProps>`
       
       footer  > div:nth-child(2) {
         filter: saturate(0.5) opacity(0.5);
+      }
+
+      dialog::backdrop {
+        background: #ffffff50;
       }`}
   `;
 
