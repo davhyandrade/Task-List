@@ -118,9 +118,13 @@
           }
         }
         
-        .concluded {
+        #completed {
           border-left: 6px solid var(--color-primary);
           text-decoration: line-through;
+          
+          input[type='image'] {
+            opacity: 100%;
+          }
         }
   
         summary {
@@ -131,13 +135,28 @@
           border: 1px solid var(--color-border);
           border-top: none;
           border-left: 6px solid rgb(157, 157, 157);
-  
+          position: relative;
+          
+          input[type='image'] {
+            width: 30px;
+            position: absolute;
+            top: 50%;
+            margin: -15px;
+            right: 3%;
+            cursor: pointer;
+            opacity: 50%;
+          }
+
           &:hover {
             transition: 1s;
             color: var(--color-tasks);
             background: linear-gradient(280deg, var(--color-gradient-primary), var(--color-gradient-secondary));
             border: 1px solid var(--color-tasks);
             border-left: 6px solid var(--color-tasks);  
+
+            input[type='image'] {
+              opacity: 100%;
+            }
           }
         }
   

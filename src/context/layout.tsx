@@ -34,23 +34,35 @@ export default function Layout({ children }: ComponentProps) {
   }
 
   function handleCloseDialog() {
-    dialog.current.close();
-    setIsActiveDialog(false);
     inputTitleTask.current.value = '';
     inputBodyTask.current.value = '';
+    setIsActiveDialog(false);
+    dialog.current.close();
   }
 
+  const [formatDigit, setFormatDigit] = useState<number>(-1);
+
   function handleTasksTemporary() {
+    const number = parseInt(Object.keys(tasksTemporary).toString().slice(formatDigit)) + 1;
+
+    const quantCaracteres = tasksTemporary.length.toString().length;
+
+    setFormatDigit(-quantCaracteres);
+
     const task = new Object({
       [inputTitleTask.current.name]: inputTitleTask.current.value,
       [inputBodyTask.current.name]: inputBodyTask.current.value,
-      id: parseInt(Object.keys(tasksTemporary).toString().slice(-1)) + 1,
+      id: number,
+      isDone: false,
     });
+
     setTasksTemporary((prevData) => ([
       ...prevData,
       task,
     ]));
+
     console.log(task);
+    
     handleCloseDialog();
   }
 

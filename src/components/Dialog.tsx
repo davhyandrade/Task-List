@@ -4,7 +4,6 @@ import { Context } from '../context/layout';
 export default function Dialog({ dialog }: any) {
   const { handleCloseDialog } = useContext(Context);
   const { handleTasksTemporary } = useContext(Context);
-  const { tasksTemporary } = useContext(Context);
   const { inputBodyTask } = useContext(Context);
   const { inputTitleTask } = useContext(Context);
 

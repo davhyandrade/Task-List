@@ -76,7 +76,12 @@ const GlobalStyles = createGlobalStyle<IProps>`
       }
 
       dialog::backdrop {
-        background: #ffffff50;
+        background: #ffffff30;
+      }
+      
+      #input-image {
+        opacity: 100%;
+        filter: hue-rotate(45deg) contrast(0.7);
       }`}
   `;
 

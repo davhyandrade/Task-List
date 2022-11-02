@@ -13,12 +13,12 @@ export default function HomeTasks() {
       {!isAuth ? (
         <>
           <h1>Entre na sua conta</h1>
-          <span>para salvar ou acessar suas Tarefas</span>
+          <span>para acessar ou alterar suas Tarefas</span>
         </>
       ) : (
         <>
-          <h1>Adicione sua primeira tarefa</h1>
-          <span>para o seu dia ser mais produtivo</span>
+          <h1>Adicione sua primeira</h1>
+          <span>tarefa para o seu dia ser mais produtivo</span>
         </>
       )
       }
