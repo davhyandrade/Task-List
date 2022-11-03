@@ -7,6 +7,7 @@ interface IContext {
   handleCloseDialog?: VoidFunction;
   handleTasksTemporary?: any;
   tasksTemporary?: object;
+  setTasksTemporary?: any;
   dialog?: RefObject<HTMLHeadingElement>;
   inputTitleTask?: LegacyRef<HTMLInputElement>;
   inputBodyTask?: LegacyRef<HTMLInputElement>;
@@ -77,6 +78,7 @@ export default function Layout({ children }: ComponentProps) {
           isActiveDialog,
           handleTasksTemporary,
           tasksTemporary,
+          setTasksTemporary,
           inputTitleTask,
           inputBodyTask,
           isAuth

@@ -53,7 +53,7 @@ const GlobalStyles = createGlobalStyle<IProps>`
       
       #button-add {
         .img-button-add {
-          filter: hue-rotate(45deg) contrast(0.7);
+          filter: hue-rotate(45deg) contrast(0.6);
         }
         
         &:hover .img-button-add {
@@ -63,12 +63,12 @@ const GlobalStyles = createGlobalStyle<IProps>`
         
         &:active .img-button-add {
           transition: 0.1s;
-          filter: hue-rotate(45deg) contrast(0.7);
+          filter: hue-rotate(45deg) contrast(0.6);
         }
       }
       
       .field > img {
-        filter: hue-rotate(45deg) contrast(0.7);
+        filter: hue-rotate(45deg) contrast(0.6);
       }
       
       footer  > div:nth-child(2) {
@@ -81,7 +81,7 @@ const GlobalStyles = createGlobalStyle<IProps>`
       
       #input-image {
         opacity: 100%;
-        filter: hue-rotate(45deg) contrast(0.7);
+        filter: hue-rotate(45deg) contrast(0.6);
       }`}
   `;
 

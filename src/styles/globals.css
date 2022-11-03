@@ -139,7 +139,7 @@ body #__next section {
   border-left: 6px solid var(--color-primary);
   text-decoration: line-through;
 }
-.section-tasks .field-tasks .body-tasks details #completed input[type=image] {
+.section-tasks .field-tasks .body-tasks details #completed input[type=image]:nth-child(1) {
   opacity: 100%;
 }
 .section-tasks .field-tasks .body-tasks details summary {
@@ -154,12 +154,22 @@ body #__next section {
 }
 .section-tasks .field-tasks .body-tasks details summary input[type=image] {
   width: 30px;
-  position: absolute;
-  top: 50%;
-  margin: -15px;
-  right: 3%;
   cursor: pointer;
+  margin: -15px;
   opacity: 50%;
+  position: absolute;
+}
+.section-tasks .field-tasks .body-tasks details summary input[type=image]:nth-child(1) {
+  top: 50%;
+  right: 70px;
+}
+.section-tasks .field-tasks .body-tasks details summary input[type=image]:nth-child(2) {
+  top: 50%;
+  right: 30px;
+  opacity: 40%;
+}
+.section-tasks .field-tasks .body-tasks details summary input[type=image]:hover {
+  opacity: 100%;
 }
 .section-tasks .field-tasks .body-tasks details summary:hover {
   transition: 1s;
@@ -167,9 +177,6 @@ body #__next section {
   background: linear-gradient(280deg, var(--color-gradient-primary), var(--color-gradient-secondary));
   border: 1px solid var(--color-tasks);
   border-left: 6px solid var(--color-tasks);
-}
-.section-tasks .field-tasks .body-tasks details summary:hover input[type=image] {
-  opacity: 100%;
 }
 .section-tasks .field-tasks .body-tasks details .description-tasks {
   min-height: 100px;

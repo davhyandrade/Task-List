@@ -40,6 +40,12 @@ export default function Tasks({ data }: any) {
     }
   }
 
+  const { setTasksTemporary } = useContext(Context);
+
+  function handleButtonDelete(id: number) {
+    setTasksTemporary(tasksTemporary.filter((value: any) => value.id !== id));
+  }
+
   return (
     <section className="section-tasks">
       <div className="add-tasks">
@@ -72,11 +78,17 @@ export default function Tasks({ data }: any) {
                     <summary id={`${value.isDone && 'completed'}`}>
                       {value.title}
                       <input
-                        id='input-image'
+                        id="input-image"
                         onClick={() => handleButtonIsDone(value.id)}
                         type="image"
                         src={`${value.isDone ? imageDone.imageCompleted : imageDone.imagePending}`}
                         alt="Image Done"
+                      />
+                      <input
+                        onClick={() => handleButtonDelete(value.id)}
+                        type="image"
+                        src="https://i.postimg.cc/HxPpDGL9/btn-exit.png"
+                        alt="Button close"
                       />
                     </summary>
                     <div className="description-tasks">

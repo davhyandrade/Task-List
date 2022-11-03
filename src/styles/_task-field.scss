@@ -122,7 +122,7 @@
           border-left: 6px solid var(--color-primary);
           text-decoration: line-through;
           
-          input[type='image'] {
+          input[type='image']:nth-child(1) {
             opacity: 100%;
           }
         }
@@ -139,12 +139,25 @@
           
           input[type='image'] {
             width: 30px;
-            position: absolute;
-            top: 50%;
-            margin: -15px;
-            right: 3%;
             cursor: pointer;
+            margin: -15px;
             opacity: 50%;
+            position: absolute;
+            
+            &:nth-child(1) {
+              top: 50%;
+              right: 70px;
+            }
+            
+            &:nth-child(2) {
+              top: 50%;
+              right: 30px;
+              opacity: 40%;
+            }
+
+            &:hover {
+              opacity: 100%;
+            }
           }
 
           &:hover {
@@ -153,10 +166,6 @@
             background: linear-gradient(280deg, var(--color-gradient-primary), var(--color-gradient-secondary));
             border: 1px solid var(--color-tasks);
             border-left: 6px solid var(--color-tasks);  
-
-            input[type='image'] {
-              opacity: 100%;
-            }
           }
         }
   
