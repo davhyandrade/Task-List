@@ -76,12 +76,17 @@ const GlobalStyles = createGlobalStyle<IProps>`
       }
 
       dialog::backdrop {
-        background: #ffffff30;
+        background: #ffffff15;
       }
       
       #input-image {
         opacity: 100%;
         filter: hue-rotate(45deg) contrast(0.6);
+      }
+      
+      .form-login form > div img, .form-register form > div img {
+        filter: invert(1);
+        opacity: 100%;
       }`}
   `;
 
@@ -145,6 +150,9 @@ export default function Menu() {
             <input className="btn-theme" onClick={handleButtonTheme} type="image" src={imageTheme} alt="theme vector" />
           </div>
           <div className="btns-login">
+            <Link href="/">
+              <a translate='no'>Home</a>
+            </Link>
             <Link href="/login">
               <a>Entrar</a>
             </Link>

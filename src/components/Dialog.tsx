@@ -6,18 +6,26 @@ export default function Dialog({ dialog }: any) {
   const { handleTasksTemporary } = useContext(Context);
   const { inputBodyTask } = useContext(Context);
   const { inputTitleTask } = useContext(Context);
-
+  
   function handleForm(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
   }
-
+  
   function handleSubmit(event: FormEvent<HTMLFormElement>){
     handleForm(event);
     handleTasksTemporary();
   }
 
+  const { setIsActiveDialog } = useContext(Context);
+
+  function handleKeyPressDialog(event: any) {
+    if(event.key === 'Escape'){
+      setIsActiveDialog(false);
+    }
+  }
+
   return (
-    <dialog ref={dialog}>
+    <dialog onKeyDown={handleKeyPressDialog} ref={dialog}>
       <div className="position">
         <form onSubmit={handleSubmit}>
           <h1>Adicionar Tarefas</h1>

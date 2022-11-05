@@ -38,16 +38,16 @@ body #__next section {
 .section-tasks .add-tasks {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   width: 100%;
-  height: 180px;
+  height: 200px;
   border-bottom: 1px solid var(--color-border);
 }
 .section-tasks .add-tasks button {
   filter: drop-shadow(0px 0px 50px var(--color-drop-shadow));
   display: flex;
   align-items: center;
-  margin-top: 30px;
   cursor: pointer;
   padding: 12px 40px;
   color: var(--color-primary);
@@ -89,6 +89,14 @@ body #__next section {
 }
 .section-tasks .add-tasks p:nth-child(2) span {
   font-weight: bolder;
+}
+.section-tasks .add-tasks p:nth-child(3) {
+  width: 23%;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: var(--color-text);
+  opacity: 45%;
+  text-align: center;
 }
 .section-tasks .field-tasks {
   width: 65%;
@@ -166,7 +174,7 @@ body #__next section {
 .section-tasks .field-tasks .body-tasks details summary input[type=image]:nth-child(2) {
   top: 50%;
   right: 30px;
-  opacity: 40%;
+  opacity: 50%;
 }
 .section-tasks .field-tasks .body-tasks details summary input[type=image]:hover {
   opacity: 100%;
@@ -323,16 +331,19 @@ body #__next section {
 .menu .position > div a {
   text-decoration: none;
 }
-.menu .position > div a:nth-child(1) {
+.menu .position > div a:nth-child(1), .menu .position > div a:nth-child(2) {
   font-size: 1rem;
   color: var(--color-text);
   margin-right: 35px;
 }
-.menu .position > div a:nth-child(1):hover {
+.menu .position > div a:nth-child(1):hover, .menu .position > div a:nth-child(2):hover {
   transition: 1s;
   color: var(--color-primary);
 }
-.menu .position > div a:nth-child(2) {
+.menu .position > div a:nth-child(1) {
+  margin-right: 40px;
+}
+.menu .position > div a:nth-child(3) {
   padding: 12px 30px;
   border-radius: 25px;
   background-color: var(--bg-panel-third);
@@ -340,12 +351,12 @@ body #__next section {
   color: var(--color-headings);
   opacity: 90%;
 }
-.menu .position > div a:nth-child(2):hover {
+.menu .position > div a:nth-child(3):hover {
   transition: 1s;
   background-color: var(--bg-panel-hover);
   opacity: 100%;
 }
-.menu .position > div a:nth-child(2):active {
+.menu .position > div a:nth-child(3):active {
   transition: 0.1s;
   background-color: var(--bg-panel-hover);
   opacity: 30%;
@@ -369,7 +380,7 @@ footer {
   background-color: var(--bg-panel-secondary);
 }
 footer > div:nth-child(1) {
-  height: 450px;
+  height: 420px;
   border-top: 1px solid var(--color-border);
   display: flex;
   justify-content: flex-start;
@@ -502,7 +513,7 @@ footer > div:nth-child(2) p span {
 
 .field-info {
   width: 100%;
-  height: 750px;
+  height: 700px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -536,8 +547,10 @@ footer > div:nth-child(2) p span {
 .field-info .position .field {
   display: flex;
   margin-top: 30px;
-  margin-bottom: 40px;
   width: 50%;
+}
+.field-info .position .field:nth-child(3) {
+  margin-bottom: 40px;
 }
 .field-info .position .field img {
   width: 55px;
@@ -617,8 +630,8 @@ footer > div:nth-child(2) p span {
 dialog {
   left: 50%;
   top: 40%;
-  margin: -175px -18.5%;
-  width: 37%;
+  margin: -175px -300px;
+  width: 600px;
   height: 350px;
   background: var(--bg-panel);
   border-radius: 20px;
@@ -745,4 +758,315 @@ dialog::-webkit-backdrop {
 }
 dialog::backdrop {
   background: rgba(0, 0, 0, 0.6);
+}
+
+.form-login {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.form-login form {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.form-login form img {
+  filter: drop-shadow(10px 8px 8px var(--color-drop-shadow));
+}
+.form-login form h1 {
+  font-size: 2rem;
+  color: var(--color-headings);
+  font-weight: normal;
+  margin-top: 20px;
+}
+.form-login form h1 span {
+  font-weight: bolder;
+  font-size: 2.2rem;
+}
+.form-login form > p {
+  color: var(--color-text);
+  margin-bottom: 60px;
+  margin-top: 10px;
+  font-size: 1rem;
+}
+.form-login form > p a {
+  text-decoration: none;
+  color: var(--color-primary);
+  font-weight: bolder;
+  font-size: 1.1rem;
+}
+.form-login form > p a:hover {
+  transition: 1s;
+  opacity: 50%;
+  text-decoration: underline;
+}
+.form-login form > p a:active {
+  transition: 0.1s;
+  opacity: 100%;
+  text-decoration: none;
+}
+.form-login form > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+.form-login form > div:nth-child(4) {
+  margin-bottom: 45px;
+}
+.form-login form > div label {
+  position: absolute;
+  top: 0;
+  font-size: 1.05rem;
+  color: var(--color-text);
+}
+.form-login form > div input {
+  border: none;
+  border-bottom: 2px solid var(--color-text);
+  padding: 5px;
+  outline: none;
+  font-size: 1rem;
+  background-color: var(--bg-color);
+  color: var(--color-headings);
+}
+.form-login form > div input + label {
+  transform: translateY(-20px);
+  font-size: 0.9rem;
+}
+.form-login form > div input:-moz-placeholder-shown + label {
+  transform: translateY(0);
+  font-size: 1rem;
+}
+.form-login form > div input:-ms-input-placeholder + label {
+  transform: translateY(0);
+  font-size: 1rem;
+}
+.form-login form > div input:placeholder-shown + label {
+  transform: translateY(0);
+  font-size: 1rem;
+}
+.form-login form > div input::-moz-placeholder {
+  visibility: hidden;
+}
+.form-login form > div input:-ms-input-placeholder {
+  visibility: hidden;
+}
+.form-login form > div input::placeholder {
+  visibility: hidden;
+}
+.form-login form > div input:focus {
+  transition: 1s;
+  border-bottom: 2px solid var(--color-primary);
+}
+.form-login form > div input:focus + label {
+  transition: 0.5s;
+  transform: translateY(-20px);
+  font-size: 0.9rem;
+  color: var(--color-primary);
+}
+.form-login form > div img {
+  width: 30px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 20px;
+  opacity: 70%;
+}
+.form-login form > div img:hover {
+  transition: 1s;
+  background: rgba(255, 255, 255, 0.1);
+}
+.form-login form > a {
+  margin-top: 25px;
+  margin-bottom: 40px;
+  text-decoration: none;
+  width: 100%;
+  text-align: left;
+  color: var(--color-text);
+  font-size: 0.9rem;
+}
+.form-login form > a:hover {
+  transition: 1s;
+  color: var(--color-primary);
+}
+.form-login form input[type=submit] {
+  width: 100%;
+  background-color: var(--color-primary);
+  padding: 10px;
+  cursor: pointer;
+  border: 2px solid var(--color-primary);
+  color: var(--color);
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1.05rem;
+  letter-spacing: 1px;
+}
+.form-login form input[type=submit]:hover {
+  transition: 1s;
+  background-color: transparent;
+  color: var(--color-primary);
+}
+.form-login form input[type=submit]:active {
+  transition: 0.1s;
+  background-color: var(--color-primary);
+  color: var(--color);
+}
+
+.form-register {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.form-register form {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.form-register form img {
+  filter: drop-shadow(10px 8px 8px var(--color-drop-shadow));
+}
+.form-register form h1 {
+  font-size: 2rem;
+  color: var(--color-headings);
+  font-weight: normal;
+  margin-top: 20px;
+}
+.form-register form h1 span {
+  font-weight: bolder;
+  font-size: 2.2rem;
+}
+.form-register form > p {
+  color: var(--color-text);
+  margin-bottom: 60px;
+  margin-top: 10px;
+  font-size: 1rem;
+}
+.form-register form > p a {
+  text-decoration: none;
+  color: var(--color-primary);
+  font-weight: bolder;
+  font-size: 1.1rem;
+}
+.form-register form > p a:hover {
+  transition: 1s;
+  opacity: 50%;
+  text-decoration: underline;
+}
+.form-register form > p a:active {
+  transition: 0.1s;
+  opacity: 100%;
+  text-decoration: none;
+}
+.form-register form > div {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.form-register form > div .container-input {
+  width: 48%;
+}
+.form-register form .container-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  margin-bottom: 45px;
+}
+.form-register form .container-input label {
+  position: absolute;
+  top: 0;
+  font-size: 1.05rem;
+  color: var(--color-text);
+}
+.form-register form .container-input input {
+  border: none;
+  border-bottom: 2px solid var(--color-text);
+  padding: 5px;
+  outline: none;
+  font-size: 1rem;
+  background-color: var(--bg-color);
+  color: var(--color-headings);
+}
+.form-register form .container-input input + label {
+  transform: translateY(-20px);
+  font-size: 0.9rem;
+}
+.form-register form .container-input input:-moz-placeholder-shown + label {
+  transform: translateY(0);
+  font-size: 1rem;
+}
+.form-register form .container-input input:-ms-input-placeholder + label {
+  transform: translateY(0);
+  font-size: 1rem;
+}
+.form-register form .container-input input:placeholder-shown + label {
+  transform: translateY(0);
+  font-size: 1rem;
+}
+.form-register form .container-input input::-moz-placeholder {
+  visibility: hidden;
+}
+.form-register form .container-input input:-ms-input-placeholder {
+  visibility: hidden;
+}
+.form-register form .container-input input::placeholder {
+  visibility: hidden;
+}
+.form-register form .container-input input:focus {
+  transition: 1s;
+  border-bottom: 2px solid var(--color-primary);
+}
+.form-register form .container-input input:focus + label {
+  transition: 0.5s;
+  transform: translateY(-20px);
+  font-size: 0.9rem;
+  color: var(--color-primary);
+}
+.form-register form .container-input img {
+  width: 30px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 20px;
+  opacity: 70%;
+}
+.form-register form .container-input img:hover {
+  transition: 1s;
+  background: rgba(255, 255, 255, 0.1);
+}
+.form-register form input[type=submit] {
+  width: 100%;
+  background-color: var(--color-primary);
+  padding: 10px;
+  cursor: pointer;
+  border: 2px solid var(--color-primary);
+  color: var(--color);
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1.05rem;
+  letter-spacing: 1px;
+}
+.form-register form input[type=submit]:hover {
+  transition: 1s;
+  background-color: transparent;
+  color: var(--color-primary);
+}
+.form-register form input[type=submit]:active {
+  transition: 0.1s;
+  background-color: var(--color-primary);
+  color: var(--color);
 }/*# sourceMappingURL=globals.css.map */

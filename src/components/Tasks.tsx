@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Context } from '../context/layout';
 import Dialog from '../components/Dialog';
 
@@ -44,6 +44,9 @@ export default function Tasks({ data }: any) {
 
   function handleButtonDelete(id: number) {
     setTasksTemporary(tasksTemporary.filter((value: any) => value.id !== id));
+    tasksTemporary.forEach((element: any) => {
+      if (element.id > id) element.id -= 1;
+    });
   }
 
   return (
@@ -56,6 +59,7 @@ export default function Tasks({ data }: any) {
         <p>
           Clique para adicionar suas <span>tarefas</span>
         </p>
+        {!isAuth && <p>Algumas funcionalidades estaram disponíveis apenas se você estiver logado</p>}
         <Dialog dialog={dialog} />
       </div>
       <div className="field-tasks">

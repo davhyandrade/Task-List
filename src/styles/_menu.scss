@@ -34,18 +34,22 @@
                 text-decoration: none;
             }
     
-            a:nth-child(1) {
+            a:nth-child(1), a:nth-child(2) {
                 font-size: 1rem;
                 color: var(--color-text);
                 margin-right: 35px;
-     
+                
                 &:hover {
                     transition: 1s;
                     color: var(--color-primary);
                 }
             }
+
+            a:nth-child(1) {
+                margin-right: 40px;
+            }
     
-            a:nth-child(2) {
+            a:nth-child(3) {
                 padding: 12px 30px;
                 border-radius: 25px;
                 background-color: var(--bg-panel-third);

@@ -1,4 +1,4 @@
-import { createContext, LegacyRef, ReactNode, RefObject, useRef, useState } from 'react';
+import { createContext, Dispatch, LegacyRef, ReactNode, RefObject, useRef, useState } from 'react';
 import Menu from '../components/Menu';
 import Footer from '../components/Footer';
 
@@ -12,6 +12,7 @@ interface IContext {
   inputTitleTask?: LegacyRef<HTMLInputElement>;
   inputBodyTask?: LegacyRef<HTMLInputElement>;
   isActiveDialog?: boolean;
+  setIsActiveDialog?: any;
   isAuth?: boolean;
 }
 
@@ -76,6 +77,7 @@ export default function Layout({ children }: ComponentProps) {
           handleCloseDialog,
           dialog,
           isActiveDialog,
+          setIsActiveDialog,
           handleTasksTemporary,
           tasksTemporary,
           setTasksTemporary,

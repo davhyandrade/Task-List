@@ -27,6 +27,7 @@ export async function getStaticProps() {
 interface IProps {
   quantTasks: number;
   isActiveDialog: boolean | undefined;
+  isAuth: boolean | undefined;
 }
 
 const GlobalStyles = createGlobalStyle<IProps>`    
@@ -39,6 +40,11 @@ const GlobalStyles = createGlobalStyle<IProps>`
     props.isActiveDialog &&
     `body {
       overflow: hidden;
+    }`}
+  ${(props) =>
+    props.isAuth &&
+    `.section-tasks .add-tasks {
+      height: 180px;
     }`}
 `;
 
@@ -56,7 +62,7 @@ const Home: NextPage = ({ data, quantTasks }: any) => {
   }
   return (
     <>
-      <GlobalStyles quantTasks={isQuantTasks} isActiveDialog={isActiveDialog} />
+      <GlobalStyles quantTasks={isQuantTasks} isActiveDialog={isActiveDialog} isAuth={isAuth} />
       {isQuantTasks > 0 ? <Tasks data={data} /> : <HomeTasks />}
       <InfoField />
     </>
