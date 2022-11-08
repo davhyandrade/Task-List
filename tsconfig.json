@@ -15,6 +15,14 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/api/tasks.ts", "src/utils/database.ts", "src/components/Menu.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/pages/api/tasks.ts",
+    "src/utils/database.ts",
+    "src/components/Menu.tsx",
+    "src/middleware.ts"
+  ],
   "exclude": ["node_modules"]
 }

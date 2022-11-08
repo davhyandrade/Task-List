@@ -45,6 +45,10 @@ const GlobalStyles = createGlobalStyle<IProps>`
     props.isAuth &&
     `.section-tasks .add-tasks {
       height: 180px;
+    }
+    
+    .home-tasks > h1 {
+      font-size: 3.6rem;
     }`}
 `;
 
@@ -55,7 +59,7 @@ const Home: NextPage = ({ data, quantTasks }: any) => {
 
   var isQuantTasks: number;
 
-  if(isAuth) {
+  if (isAuth) {
     isQuantTasks = quantTasks;
   } else {
     isQuantTasks = tasksTemporary.length - 1;

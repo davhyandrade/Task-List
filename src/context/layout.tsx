@@ -1,8 +1,14 @@
-import { createContext, Dispatch, LegacyRef, ReactNode, RefObject, useRef, useState } from 'react';
+import { createContext, LegacyRef, ReactNode, RefObject, useEffect, useId, useRef, useState } from 'react';
 import Menu from '../components/Menu';
 import Footer from '../components/Footer';
+import { parseCookies } from 'nookies';
+import jwt from 'jsonwebtoken';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface IContext {
+  fetchDataUser?: () => Promise<void>;
   handleButtonAdd?: VoidFunction;
   handleCloseDialog?: VoidFunction;
   handleTasksTemporary?: any;
@@ -14,6 +20,8 @@ interface IContext {
   isActiveDialog?: boolean;
   setIsActiveDialog?: any;
   isAuth?: boolean;
+  userId?: object | null;
+  setUserId?: any;
 }
 
 type ComponentProps = {
@@ -28,7 +36,6 @@ export default function Layout({ children }: ComponentProps) {
   const dialog = useRef<any>(null);
   const inputTitleTask = useRef<any>(null);
   const inputBodyTask = useRef<any>(null);
-  const [isAuth, setIsAuth] = useState<boolean>(false);
 
   function handleButtonAdd() {
     dialog.current.showModal();
@@ -58,19 +65,49 @@ export default function Layout({ children }: ComponentProps) {
       isDone: false,
     });
 
-    setTasksTemporary((prevData) => ([
-      ...prevData,
-      task,
-    ]));
+    setTasksTemporary((prevData) => [...prevData, task]);
 
     console.log(task);
-    
+
     handleCloseDialog();
   }
 
+  const [user, setUser] = useState<object | null>(null);
+  const [userId, setUserId] = useState<any>({});
+
+  const [isAuth, setIsAuth] = useState<boolean>(false);
+
+  async function fetchDataUser() {
+    const { token }: any = parseCookies();
+    if (token) {
+      setUserId(jwt.decode(token) as any);
+
+      try {
+        const requestUser = await axios.get(`/api/auth/user/${(jwt.decode(token) as any).id}`, {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
+        setUser(requestUser);
+        setIsAuth(true);
+        toast.success('Autenticado!', {
+          theme: 'colored',
+        });
+      } catch (error: any) {
+        toast.error(error.response.data.msg, {
+          theme: 'colored',
+        });
+        console.log(error);
+      }
+    }
+  }
+
+  useEffect(() => {
+    fetchDataUser();
+  }, []);
+
   return (
     <>
-      <Menu />
       <Context.Provider
         value={{
           handleButtonAdd,
@@ -83,12 +120,17 @@ export default function Layout({ children }: ComponentProps) {
           setTasksTemporary,
           inputTitleTask,
           inputBodyTask,
-          isAuth
+          isAuth,
+          setUserId,
+          userId,
+          fetchDataUser,
         }}
       >
+        <Menu />
         <section>{children}</section>
+        <Footer />
+        <ToastContainer />
       </Context.Provider>
-      <Footer />
     </>
   );
 }

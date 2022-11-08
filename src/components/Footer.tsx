@@ -27,7 +27,7 @@ export default function Footer() {
       <div>
         <div>
           <a onClick={() => window.scrollTo(0,0)}>Inicio</a>
-          <Link href="/login-user">
+          <Link href="/login">
               <a>Entrar</a>
           </Link>
         </div>

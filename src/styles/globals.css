@@ -907,6 +907,7 @@ dialog::backdrop {
   font-weight: bold;
   font-size: 1.05rem;
   letter-spacing: 1px;
+  margin-bottom: 40px;
 }
 .form-login form input[type=submit]:hover {
   transition: 1s;
@@ -1059,6 +1060,7 @@ dialog::backdrop {
   font-weight: bold;
   font-size: 1.05rem;
   letter-spacing: 1px;
+  margin-bottom: 40px;
 }
 .form-register form input[type=submit]:hover {
   transition: 1s;

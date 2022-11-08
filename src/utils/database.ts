@@ -14,5 +14,5 @@ export const connectDatabase = () =>
       console.log('Mongodb Atlas connected');
     })
     .catch((error: Params) => {
-      console.log(error);
+      console.log("Monogdb não conectou!\nError: "+error);
     });
