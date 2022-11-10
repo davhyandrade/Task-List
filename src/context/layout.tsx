@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from '../components/Loader';
 
 interface IContext {
   fetchDataUser?: () => Promise<void>;
@@ -105,32 +106,48 @@ export default function Layout({ children }: ComponentProps) {
     handleCloseDialog();
   }
 
+  const [isActiveLoading, setIsActiveLoading] = useState<boolean>(true);
+  const [visibleLoading, setVisibleLoading] = useState<boolean>(false)
+
+  useEffect(() => {
+    setVisibleLoading(true);
+  })
+
+  function handlePageLoaded() {
+    setTimeout(() => {
+      setIsActiveLoading(false);
+    }, 1000);
+  }
+
   return (
     <>
-      <Context.Provider
-        value={{
-          handleButtonAdd,
-          handleCloseDialog,
-          dialog,
-          isActiveDialog,
-          setIsActiveDialog,
-          handleTasksTemporary,
-          tasksTemporary,
-          setTasksTemporary,
-          inputTitleTask,
-          inputBodyTask,
-          isAuth,
-          setIsAuth,
-          setUserId,
-          userId,
-          fetchDataUser,
-        }}
-      >
-        <Menu />
-        <section>{children}</section>
-        <Footer />
-        <ToastContainer />
-      </Context.Provider>
+      {isActiveLoading && <Loader/>}
+      {visibleLoading && 
+        <Context.Provider
+          value={{
+            handleButtonAdd,
+            handleCloseDialog,
+            dialog,
+            isActiveDialog,
+            setIsActiveDialog,
+            handleTasksTemporary,
+            tasksTemporary,
+            setTasksTemporary,
+            inputTitleTask,
+            inputBodyTask,
+            isAuth,
+            setIsAuth,
+            setUserId,
+            userId,
+            fetchDataUser,
+          }}
+        >
+          <Menu />
+          <section onLoad={handlePageLoaded}>{children}</section>
+          <Footer />
+          <ToastContainer />
+        </Context.Provider>
+      }
     </>
   );
 }
