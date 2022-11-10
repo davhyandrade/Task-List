@@ -1,7 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
+import { Context } from '../context/layout';
+import { destroyCookie } from 'nookies';
+import { toast } from 'react-toastify';
+import Router from 'next/router';
 
 interface IProps {
   isActiveThemeDarkOrLight: string;
@@ -87,7 +91,12 @@ const GlobalStyles = createGlobalStyle<IProps>`
       .form-login form > div img, .form-register form > div img {
         filter: invert(1);
         opacity: 100%;
-      }`}
+      }
+      
+              
+    .btns-login > input[type="image"] {
+      filter: invert(1);
+    }`}
   `;
 
 export default function Menu() {
@@ -126,6 +135,17 @@ export default function Menu() {
     }
   }, [images.imageLua]);
 
+  const { isAuth } = useContext(Context);
+  const { setIsAuth } = useContext(Context);
+
+  function handleLogout() {
+    destroyCookie(undefined, 'token');
+    setIsAuth(false);
+    toast.error('Usuário desconectado!', {
+      theme: 'colored',
+    });
+  }
+
   return (
     <>
       <GlobalStyles isActiveThemeDarkOrLight={isActiveThemeDarkOrLight} />
@@ -150,15 +170,21 @@ export default function Menu() {
             <input className="btn-theme" onClick={handleButtonTheme} type="image" src={imageTheme} alt="theme vector" />
           </div>
           <div className="btns-login">
-            <Link href="/">
-              <a translate='no'>Home</a>
-            </Link>
-            <Link href="/login">
-              <a>Entrar</a>
-            </Link>
-            <Link href="/register">
-              <a>Cadastrar-se</a>
-            </Link>
+            {isAuth ? (
+              <input onClick={handleLogout} type="image" src="https://i.postimg.cc/qqhzh8Zk/logout.png" alt="logout" />
+            ) : (
+              <>
+                <Link href="/">
+                  <a translate="no">Home</a>
+                </Link>
+                <Link href="/login">
+                  <a>Entrar</a>
+                </Link>
+                <Link href="/register">
+                  <a>Cadastrar-se</a>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </nav>

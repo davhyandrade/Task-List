@@ -5,7 +5,7 @@ import Router from 'next/router';
 import { FormEvent, useContext, useRef, useState } from 'react';
 import { setCookie } from 'nookies';
 import { Context } from '../context/layout';
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify';
 
 export default function Login() {
   const inputEmail = useRef<any>(null);
@@ -50,8 +50,11 @@ export default function Login() {
         });
         Router.push('/');
         fetchDataUser();
+        toast.success('Usuário logado!', {
+          theme: 'colored',
+        });
       }
-    } catch(error: any) {
+    } catch (error: any) {
       toast.error(error.response.data.msg, {
         theme: 'colored',
       });

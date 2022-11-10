@@ -18,10 +18,12 @@ const userSchema = new mongoose.Schema({
     ref: 'User',
     require: true,
   },
-  tasks: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Task',
-  }],
+  tasks: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Task',
+    },
+  ],
   createAt: {
     type: Date,
     default: Date.now,
@@ -29,4 +31,3 @@ const userSchema = new mongoose.Schema({
 });
 
 export default mongoose.models.User || mongoose.model('User', userSchema);
-

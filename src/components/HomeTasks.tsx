@@ -20,8 +20,7 @@ export default function HomeTasks() {
           <h1>Adicione sua primeira</h1>
           <span>tarefa para o seu dia ser mais produtivo</span>
         </>
-      )
-      }
+      )}
       <Image src="https://i.postimg.cc/8CCJ3pKF/icone-task-list.png" alt="logo tasklist" width={150} height={100} />
       <div className="add-tasks">
         <button onClick={handleButtonAdd} id="button-add" translate="no">

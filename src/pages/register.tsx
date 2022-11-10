@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Router from 'next/router';
 import { FormEvent, useRef, useState } from 'react';
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify';
 
 export default function Register() {
   const inputNome = useRef<any>(null);

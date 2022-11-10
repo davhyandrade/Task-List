@@ -1,7 +1,7 @@
-import { createContext, LegacyRef, ReactNode, RefObject, useEffect, useId, useRef, useState } from 'react';
+import { createContext, Dispatch, LegacyRef, ReactNode, RefObject, useEffect, useId, useRef, useState } from 'react';
 import Menu from '../components/Menu';
 import Footer from '../components/Footer';
-import { parseCookies } from 'nookies';
+import { destroyCookie, parseCookies } from 'nookies';
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -20,6 +20,7 @@ interface IContext {
   isActiveDialog?: boolean;
   setIsActiveDialog?: any;
   isAuth?: boolean;
+  setIsAuth?: any;
   userId?: object | null;
   setUserId?: any;
 }
@@ -36,6 +37,38 @@ export default function Layout({ children }: ComponentProps) {
   const dialog = useRef<any>(null);
   const inputTitleTask = useRef<any>(null);
   const inputBodyTask = useRef<any>(null);
+
+  const [user, setUser] = useState<object | null>(null);
+  const [userId, setUserId] = useState<any>({});
+
+  const [isAuth, setIsAuth] = useState<boolean>(false);
+
+  async function fetchDataUser() {
+    const { token }: any = parseCookies();
+    if (token) {
+      setUserId(jwt.decode(token) as any);
+
+      try {
+        const requestUser = await axios.get(`/api/auth/user/${(jwt.decode(token) as any).id}`, {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
+        setUser(requestUser);
+        setIsAuth(true);
+      } catch (error: any) {
+        destroyCookie(undefined, 'token');
+        toast.error(error.response.data.msg, {
+          theme: 'colored',
+        });
+        console.log(error);
+      }
+    }
+  }
+
+  useEffect(() => {
+    fetchDataUser();
+  }, []);
 
   function handleButtonAdd() {
     dialog.current.showModal();
@@ -72,40 +105,6 @@ export default function Layout({ children }: ComponentProps) {
     handleCloseDialog();
   }
 
-  const [user, setUser] = useState<object | null>(null);
-  const [userId, setUserId] = useState<any>({});
-
-  const [isAuth, setIsAuth] = useState<boolean>(false);
-
-  async function fetchDataUser() {
-    const { token }: any = parseCookies();
-    if (token) {
-      setUserId(jwt.decode(token) as any);
-
-      try {
-        const requestUser = await axios.get(`/api/auth/user/${(jwt.decode(token) as any).id}`, {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        });
-        setUser(requestUser);
-        setIsAuth(true);
-        toast.success('Autenticado!', {
-          theme: 'colored',
-        });
-      } catch (error: any) {
-        toast.error(error.response.data.msg, {
-          theme: 'colored',
-        });
-        console.log(error);
-      }
-    }
-  }
-
-  useEffect(() => {
-    fetchDataUser();
-  }, []);
-
   return (
     <>
       <Context.Provider
@@ -121,6 +120,7 @@ export default function Layout({ children }: ComponentProps) {
           inputTitleTask,
           inputBodyTask,
           isAuth,
+          setIsAuth,
           setUserId,
           userId,
           fetchDataUser,

@@ -1,10 +1,10 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import Head from 'next/head'
-import Context from '../context/layout'
+import '../styles/globals.css';
+import type { AppProps } from 'next/app';
+import Head from 'next/head';
+import Context from '../context/layout';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return(
+  return (
     <>
       <Head>
         <title>Task List</title>
@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </Context>
     </>
-  ) 
+  );
 }
 
-export default MyApp
+export default MyApp;

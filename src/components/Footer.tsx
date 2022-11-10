@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function Footer() {
   return (
@@ -26,9 +26,9 @@ export default function Footer() {
       </div>
       <div>
         <div>
-          <a onClick={() => window.scrollTo(0,0)}>Inicio</a>
+          <a onClick={() => window.scrollTo(0, 0)}>Inicio</a>
           <Link href="/login">
-              <a>Entrar</a>
+            <a>Entrar</a>
           </Link>
         </div>
         <div>

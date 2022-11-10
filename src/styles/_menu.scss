@@ -37,16 +37,16 @@
             a:nth-child(1), a:nth-child(2) {
                 font-size: 1rem;
                 color: var(--color-text);
-                margin-right: 35px;
                 
                 &:hover {
                     transition: 1s;
                     color: var(--color-primary);
                 }
             }
-
-            a:nth-child(1) {
-                margin-right: 40px;
+            
+            a:nth-child(2) {
+                margin-right: 35px;
+                margin-left: 40px;
             }
     
             a:nth-child(3) {
@@ -67,6 +67,28 @@
                     transition: 0.1s;
                     background-color: var(--bg-panel-hover);
                     opacity: 30%;
+                }
+            }
+            
+        }
+        
+        .btns-login {
+            > input[type="image"] {
+                width: 40px;
+                opacity: 40%;
+                margin-right: 20px;
+                border-radius: 5px;
+                padding: 5px;
+
+                &:hover {
+                    transition: 1s; 
+                    opacity: 60%;
+                    background: rgba(128, 128, 128, 0.1);
+                }
+
+                &:active {
+                    transition: 0.1s;
+                    opacity: 20%;
                 }
             }
         }
