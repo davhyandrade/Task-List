@@ -53,50 +53,59 @@ const GlobalStyles = createGlobalStyle<IProps>`
           --color-gradient-secondary: #222830;
           --color-summary-tasks: #191e25;
           --color: #10151b;
-      }
-      
-      #button-add {
-        .img-button-add {
+        }
+        
+        #button-add {
+          .img-button-add {
+            filter: hue-rotate(45deg) contrast(0.6);
+          }
+          
+          &:hover .img-button-add {
+            transition: 1s;
+            filter: brightness(0) grayscale(1) invert(1);
+          }
+          
+          &:active .img-button-add {
+            transition: 0.1s;
+            filter: hue-rotate(45deg) contrast(0.6);
+          }
+        }
+        
+        .field > img {
           filter: hue-rotate(45deg) contrast(0.6);
         }
         
-        &:hover .img-button-add {
-          transition: 1s;
-          filter: brightness(0) grayscale(1) invert(1);
+        footer  > div:nth-child(2) {
+          filter: saturate(0.5) opacity(0.5);
         }
-        
-        &:active .img-button-add {
-          transition: 0.1s;
-          filter: hue-rotate(45deg) contrast(0.6);
-        }
-      }
-      
-      .field > img {
-        filter: hue-rotate(45deg) contrast(0.6);
-      }
-      
-      footer  > div:nth-child(2) {
-        filter: saturate(0.5) opacity(0.5);
-      }
 
-      dialog::backdrop {
-        background: #ffffff15;
-      }
-      
-      #input-image {
-        opacity: 100%;
-        filter: hue-rotate(45deg) contrast(0.6);
-      }
-      
-      .form-login form > div img, .form-register form > div img {
-        filter: invert(1);
-        opacity: 100%;
-      }
-      
-              
-    .btns-login > input[type="image"] {
-      filter: invert(1);
-    }`}
+        dialog::backdrop {
+          background: #ffffff15;
+        }
+        
+        #input-image {
+          opacity: 100%;
+          filter: hue-rotate(45deg) contrast(0.6);
+        }
+        
+        .form-login form > div img, .form-register form > div img {
+          filter: invert(1);
+          opacity: 100%;
+        }
+                
+        .btns-login > input[type="image"] {
+          filter: invert(1);
+        }
+
+        .section-tasks .field-tasks .header-tasks > span {
+          opacity: 10%;
+
+          span {
+            color: var(--color-headings);
+            background-color: rgba(0, 0, 0, 0.5);
+          }
+        }
+      `}
   `;
 
 export default function Menu() {

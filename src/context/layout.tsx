@@ -17,13 +17,14 @@ interface IContext {
   setTasksTemporary?: any;
   dialog?: RefObject<HTMLHeadingElement>;
   inputTitleTask?: LegacyRef<HTMLInputElement>;
-  inputBodyTask?: LegacyRef<HTMLInputElement>;
+  inputDescriptionTask?: LegacyRef<HTMLInputElement>;
   isActiveDialog?: boolean;
   setIsActiveDialog?: any;
   isAuth?: boolean;
   setIsAuth?: any;
-  userId?: object | null;
-  setUserId?: any;
+  handleTasks?: any;
+  tasks?: any;
+  fetchTasks?: any;
 }
 
 type ComponentProps = {
@@ -37,18 +38,16 @@ export default function Layout({ children }: ComponentProps) {
   const [tasksTemporary, setTasksTemporary] = useState<Array<object>>([{}]);
   const dialog = useRef<any>(null);
   const inputTitleTask = useRef<any>(null);
-  const inputBodyTask = useRef<any>(null);
+  const inputDescriptionTask = useRef<any>(null);
 
   const [user, setUser] = useState<object | null>(null);
-  const [userId, setUserId] = useState<any>({});
 
   const [isAuth, setIsAuth] = useState<boolean>(false);
 
   async function fetchDataUser() {
     const { token }: any = parseCookies();
-    if (token) {
-      setUserId(jwt.decode(token) as any);
 
+    if (token) {
       try {
         const requestUser = await axios.get(`/api/auth/user/${(jwt.decode(token) as any).id}`, {
           headers: {
@@ -65,6 +64,57 @@ export default function Layout({ children }: ComponentProps) {
         console.log(error);
       }
     }
+    fetchTasks();
+  }
+
+  const [tasks, setTasks] = useState();
+
+  async function fetchTasks() {
+    const { token }: any = parseCookies();
+
+    if (token) {
+      try {
+        const getTasks = await axios.get('/api/tasks', {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
+        setTasks(getTasks.data)
+      } catch (error: any) {
+        destroyCookie(undefined, 'token');
+        toast.error(error.response.data.msg, {
+          theme: 'colored',
+        });
+        console.log(error);
+      }
+    }
+  }
+
+  async function handleTasks() {
+    const { token }: any = parseCookies();
+
+    if (token) {
+      try {
+        const createTasks = await axios.post('api/tasks', {
+          [inputTitleTask.current.name]: inputTitleTask.current.value,
+          [inputDescriptionTask.current.name]: inputDescriptionTask.current.value,
+        },{
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        })
+        console.log(createTasks);
+        fetchTasks();
+      } catch (error: any) {
+        destroyCookie(undefined, 'token');
+        toast.error(error.response.data.msg, {
+          theme: 'colored',
+        });
+        console.log(error);
+      }
+    }
+
+    handleCloseDialog();
   }
 
   useEffect(() => {
@@ -78,7 +128,7 @@ export default function Layout({ children }: ComponentProps) {
 
   function handleCloseDialog() {
     inputTitleTask.current.value = '';
-    inputBodyTask.current.value = '';
+    inputDescriptionTask.current.value = '';
     setIsActiveDialog(false);
     dialog.current.close();
   }
@@ -94,9 +144,9 @@ export default function Layout({ children }: ComponentProps) {
 
     const task = new Object({
       [inputTitleTask.current.name]: inputTitleTask.current.value,
-      [inputBodyTask.current.name]: inputBodyTask.current.value,
+      [inputDescriptionTask.current.name]: inputDescriptionTask.current.value,
       id: number,
-      isDone: false,
+      completed: false,
     });
 
     setTasksTemporary((prevData) => [...prevData, task]);
@@ -107,22 +157,22 @@ export default function Layout({ children }: ComponentProps) {
   }
 
   const [isActiveLoading, setIsActiveLoading] = useState<boolean>(true);
-  const [visibleLoading, setVisibleLoading] = useState<boolean>(false)
+  const [isVisiblePage, setIsVisibleP] = useState<boolean>(false);
 
   useEffect(() => {
-    setVisibleLoading(true);
-  })
+    setIsVisibleP(true);
+  });
 
   function handlePageLoaded() {
     setTimeout(() => {
       setIsActiveLoading(false);
-    }, 1000);
+    }, 2000);
   }
 
   return (
     <>
-      {isActiveLoading && <Loader/>}
-      {visibleLoading && 
+      {isActiveLoading && <Loader />}
+      {isVisiblePage && (
         <Context.Provider
           value={{
             handleButtonAdd,
@@ -134,12 +184,13 @@ export default function Layout({ children }: ComponentProps) {
             tasksTemporary,
             setTasksTemporary,
             inputTitleTask,
-            inputBodyTask,
+            inputDescriptionTask,
             isAuth,
             setIsAuth,
-            setUserId,
-            userId,
             fetchDataUser,
+            handleTasks,
+            tasks,
+            fetchTasks
           }}
         >
           <Menu />
@@ -147,7 +198,7 @@ export default function Layout({ children }: ComponentProps) {
           <Footer />
           <ToastContainer />
         </Context.Provider>
-      }
+      )}
     </>
   );
 }

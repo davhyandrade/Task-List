@@ -4,16 +4,23 @@ import { Context } from '../context/layout';
 export default function Dialog({ dialog }: any) {
   const { handleCloseDialog } = useContext(Context);
   const { handleTasksTemporary } = useContext(Context);
-  const { inputBodyTask } = useContext(Context);
+  const { inputDescriptionTask } = useContext(Context);
   const { inputTitleTask } = useContext(Context);
 
   function handleForm(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
   }
 
+  const { isAuth } = useContext(Context);
+  const { handleTasks } = useContext(Context);
+
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     handleForm(event);
-    handleTasksTemporary();
+    if (isAuth) {
+      handleTasks();
+    } else {
+      handleTasksTemporary();
+    }
   }
 
   const { setIsActiveDialog } = useContext(Context);
@@ -34,8 +41,8 @@ export default function Dialog({ dialog }: any) {
             <label htmlFor="title-task">Título</label>
           </div>
           <div>
-            <input ref={inputBodyTask} name="body" id="body-task" type="text" placeholder="descricao" required />
-            <label htmlFor="body-task">Descrição</label>
+            <input ref={inputDescriptionTask} name="description" id="description-task" type="text" placeholder="descricao" required />
+            <label htmlFor="description-task">Descrição</label>
           </div>
           <input type="submit" value="Criar Tarefa" />
           <input

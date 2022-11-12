@@ -1,18 +1,23 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Context } from '../context/layout';
 import Dialog from '../components/Dialog';
+import axios from 'axios';
+import { join } from 'path';
+import { parseCookies } from 'nookies';
 
-export default function Tasks({ data }: any) {
+export default function Tasks() {
   interface ITasks {
     id: number;
+    _id: number;
     title: string;
-    body: string;
-    isDone: boolean;
+    description: string;
+    completed: boolean;
   }
 
   const { handleButtonAdd } = useContext(Context);
   const { dialog } = useContext(Context);
   const { tasksTemporary }: any = useContext(Context);
+  const { tasks }: any = useContext(Context);
   const { isAuth }: any = useContext(Context);
 
   const imageDone = {
@@ -20,34 +25,49 @@ export default function Tasks({ data }: any) {
     imageCompleted: 'https://i.postimg.cc/ZqZRscjn/btn-concluido.png',
   };
 
-  const [isActiveIsDone, setIsActiveIsDone] = useState<Array<object>>([{}]);
+  const [isActiveIsCompleted, setIsActiveIsCompleted] = useState<Array<object>>([{}]);
 
-  function handleButtonIsDone(id: number) {
-    if (typeof isActiveIsDone[id] === 'undefined') {
-      if (tasksTemporary[id].isDone) {
-        setIsActiveIsDone([{ [id]: true }]);
-        tasksTemporary[id].isDone = false;
+  function handleButtonIsCompleted(id: number) {
+    if (typeof isActiveIsCompleted[id] === 'undefined') {
+      if (tasksTemporary[id].completed) {
+        setIsActiveIsCompleted([{ [id]: true }]);
+        tasksTemporary[id].completed = false;
       } else {
-        setIsActiveIsDone([{ [id]: false }]);
-        tasksTemporary[id].isDone = true;
+        setIsActiveIsCompleted([{ [id]: false }]);
+        tasksTemporary[id].completed = true;
       }
-    } else if (isActiveIsDone[id]) {
-      setIsActiveIsDone([{ [id]: false }]);
-      tasksTemporary[id].isDone = true;
+    } else if (isActiveIsCompleted[id]) {
+      setIsActiveIsCompleted([{ [id]: false }]);
+      tasksTemporary[id].completed = true;
     } else {
-      setIsActiveIsDone([{ [id]: true }]);
-      tasksTemporary[id].isDone = false;
+      setIsActiveIsCompleted([{ [id]: true }]);
+      tasksTemporary[id].completed = false;
     }
   }
 
   const { setTasksTemporary } = useContext(Context);
 
-  function handleButtonDelete(id: number) {
-    setTasksTemporary(tasksTemporary.filter((value: any) => value.id !== id));
-    tasksTemporary.forEach((element: any) => {
-      if (element.id > id) element.id -= 1;
-    });
+  const { fetchTasks } = useContext(Context);
+
+  async function handleButtonDelete(id: any) {
+    const { token }: any = parseCookies();
+
+    if (isAuth) {
+      await axios.delete(`api/tasks/${id}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      fetchTasks();
+    } else {
+      setTasksTemporary(tasksTemporary.filter((value: any) => value.id !== id));
+      tasksTemporary.forEach((element: any) => {
+        if (element.id > id) element.id -= 1;
+      });
+    }
   }
+
+  const pendingTasks = tasks.filter((value: any) => value.completed !== true).length;
 
   return (
     <section className="section-tasks">
@@ -63,15 +83,35 @@ export default function Tasks({ data }: any) {
         <Dialog dialog={dialog} />
       </div>
       <div className="field-tasks">
-        <div className="header-tasks"></div>
+        <div className="header-tasks">
+          <span>
+            PEDENTES
+            <span>{pendingTasks}</span>
+          </span>
+        </div>
         <div className="body-tasks">
           {isAuth
-            ? data.map((value: ITasks) => {
+            ? tasks.map((value: ITasks) => {
                 return (
-                  <details key={value.id}>
-                    <summary>{value.title}</summary>
+                  <details key={value._id}>
+                    <summary id={`${value.completed && 'completed'}`}>
+                      {value.title}
+                      <input
+                        id="input-image"
+                        onClick={() => handleButtonIsCompleted(value._id)}
+                        type="image"
+                        src={`${value.completed ? imageDone.imageCompleted : imageDone.imagePending}`}
+                        alt="Image Done"
+                      />
+                      <input
+                        onClick={() => handleButtonDelete(value._id)}
+                        type="image"
+                        src="https://i.postimg.cc/HxPpDGL9/btn-exit.png"
+                        alt="Button close"
+                      />
+                    </summary>
                     <div className="description-tasks">
-                      <p>{value.body}</p>
+                      <p>{value.description}</p>
                     </div>
                   </details>
                 );
@@ -79,13 +119,13 @@ export default function Tasks({ data }: any) {
             : tasksTemporary.slice(1, tasksTemporary.length).map((value: ITasks) => {
                 return (
                   <details key={value.id}>
-                    <summary id={`${value.isDone && 'completed'}`}>
+                    <summary id={`${value.completed && 'completed'}`}>
                       {value.title}
                       <input
                         id="input-image"
-                        onClick={() => handleButtonIsDone(value.id)}
+                        onClick={() => handleButtonIsCompleted(value.id)}
                         type="image"
-                        src={`${value.isDone ? imageDone.imageCompleted : imageDone.imagePending}`}
+                        src={`${value.completed ? imageDone.imageCompleted : imageDone.imagePending}`}
                         alt="Image Done"
                       />
                       <input
@@ -96,7 +136,7 @@ export default function Tasks({ data }: any) {
                       />
                     </summary>
                     <div className="description-tasks">
-                      <p>{value.body}</p>
+                      <p>{value.description}</p>
                     </div>
                   </details>
                 );

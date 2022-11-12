@@ -7,23 +7,6 @@ import HomeTasks from '../components/HomeTasks';
 import InfoField from '../components/InfoField';
 import { Context } from '../context/layout';
 
-export async function getStaticProps() {
-  let data;
-
-  let quantTasks = 0;
-
-  await axios
-    .get(`https://jsonplaceholder.typicode.com/posts/?_limit=${quantTasks}`)
-    .then((response) => (data = response.data));
-
-  return {
-    props: {
-      data,
-      quantTasks,
-    },
-  };
-}
-
 interface IProps {
   quantTasks: number;
   isActiveDialog: boolean | undefined;
@@ -34,28 +17,36 @@ const GlobalStyles = createGlobalStyle<IProps>`
   ${(props) =>
     props.quantTasks > 0 &&
     `body {
-      background-color: var(--bg-panel-secondary);
-    }`}
+        background-color: var(--bg-panel-secondary);
+      }`}
   ${(props) =>
     props.isActiveDialog &&
     `body {
-      overflow: hidden;
-    }`}
+        overflow: hidden;
+      }`}
   ${(props) =>
     props.isAuth &&
     `.section-tasks .add-tasks {
-      height: 180px;
-    }
-    
-    .home-tasks > h1 {
-      font-size: 3.6rem;
-    }`}
+        height: 180px;
+      }
+      
+      .home-tasks > h1 {
+        font-size: 3.6rem;
+      }
+      
+      body #__next section .section-tasks {
+        height: 780px;
+      }
+    `}
 `;
 
-const Home: NextPage = ({ data, quantTasks }: any) => {
+const Home: NextPage = () => {
   const { isActiveDialog } = useContext(Context);
   const { tasksTemporary }: any = useContext(Context);
   const { isAuth } = useContext(Context);
+  const { tasks } = useContext(Context);
+
+  const quantTasks = tasks?.length;
 
   var isQuantTasks: number;
 
@@ -64,10 +55,11 @@ const Home: NextPage = ({ data, quantTasks }: any) => {
   } else {
     isQuantTasks = tasksTemporary.length - 1;
   }
+
   return (
     <>
       <GlobalStyles quantTasks={isQuantTasks} isActiveDialog={isActiveDialog} isAuth={isAuth} />
-      {isQuantTasks > 0 ? <Tasks data={data} /> : <HomeTasks />}
+      {isQuantTasks > 0 ? <Tasks /> : <HomeTasks />}
       <InfoField />
     </>
   );
