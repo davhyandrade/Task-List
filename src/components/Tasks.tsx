@@ -1,9 +1,10 @@
 import { useContext, useState } from 'react';
 import { Context } from '../context/layout';
-import Dialog from '../components/Dialog';
+import Dialog from './Dialog';
+import DialogEdit from './DialogEdit';
 import axios from 'axios';
-import { join } from 'path';
-import { parseCookies } from 'nookies';
+import { destroyCookie, parseCookies } from 'nookies';
+import { toast } from 'react-toastify';
 
 export default function Tasks() {
   interface ITasks {
@@ -15,7 +16,9 @@ export default function Tasks() {
   }
 
   const { handleButtonAdd } = useContext(Context);
+  const { handleButtonOpenDialogEdit } = useContext(Context);
   const { dialog } = useContext(Context);
+  const { dialogEdit } = useContext(Context);
   const { tasksTemporary }: any = useContext(Context);
   const { tasks }: any = useContext(Context);
   const { isAuth }: any = useContext(Context);
@@ -27,21 +30,56 @@ export default function Tasks() {
 
   const [isActiveIsCompleted, setIsActiveIsCompleted] = useState<Array<object>>([{}]);
 
-  function handleButtonIsCompleted(id: number) {
-    if (typeof isActiveIsCompleted[id] === 'undefined') {
-      if (tasksTemporary[id].completed) {
-        setIsActiveIsCompleted([{ [id]: true }]);
-        tasksTemporary[id].completed = false;
+  async function handleButtonIsCompleted(id: number) {
+    if (isAuth) {
+      const task = tasks.filter((value: any) => value._id === id);
+
+      let isCompleted: boolean;
+
+      if (task[0].completed) {
+        isCompleted = false;
       } else {
+        isCompleted = true;
+      }
+
+      const { token }: any = parseCookies();
+
+      if (token) {
+        try {
+          await axios.put(`api/tasks/${id}`, {
+              completed: isCompleted,
+            },
+            {
+              headers: {
+                authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          fetchTasks();
+        } catch (error: any) {
+          destroyCookie(undefined, 'token');
+          toast.error(error.response.data.msg, {
+            theme: 'colored',
+          });
+          console.log(error);
+        }
+      }
+    } else {
+      if (typeof isActiveIsCompleted[id] === 'undefined') {
+        if (tasksTemporary[id].completed) {
+          setIsActiveIsCompleted([{ [id]: true }]);
+          tasksTemporary[id].completed = false;
+        } else {
+          setIsActiveIsCompleted([{ [id]: false }]);
+          tasksTemporary[id].completed = true;
+        }
+      } else if (isActiveIsCompleted[id]) {
         setIsActiveIsCompleted([{ [id]: false }]);
         tasksTemporary[id].completed = true;
+      } else {
+        setIsActiveIsCompleted([{ [id]: true }]);
+        tasksTemporary[id].completed = false;
       }
-    } else if (isActiveIsCompleted[id]) {
-      setIsActiveIsCompleted([{ [id]: false }]);
-      tasksTemporary[id].completed = true;
-    } else {
-      setIsActiveIsCompleted([{ [id]: true }]);
-      tasksTemporary[id].completed = false;
     }
   }
 
@@ -84,10 +122,12 @@ export default function Tasks() {
       </div>
       <div className="field-tasks">
         <div className="header-tasks">
-          <span>
-            PEDENTES
-            <span>{pendingTasks}</span>
-          </span>
+          {isAuth && (
+            <span>
+              PEDENTES
+              <span>{pendingTasks}</span>
+            </span>
+          )}
         </div>
         <div className="body-tasks">
           {isAuth
@@ -108,6 +148,13 @@ export default function Tasks() {
                         type="image"
                         src="https://i.postimg.cc/HxPpDGL9/btn-exit.png"
                         alt="Button close"
+                      />
+                      <input
+                        id="btn-edit"
+                        onClick={() => handleButtonOpenDialogEdit(value)}
+                        type="image"
+                        src="https://i.postimg.cc/RVpnFfdm/btn-edijt.png"
+                        alt="Image edit"
                       />
                     </summary>
                     <div className="description-tasks">
@@ -142,6 +189,7 @@ export default function Tasks() {
                 );
               })}
         </div>
+        <DialogEdit dialog={dialogEdit} />
       </div>
       {!isAuth && (
         <p>

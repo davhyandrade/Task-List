@@ -11,13 +11,17 @@ import Loader from '../components/Loader';
 interface IContext {
   fetchDataUser?: () => Promise<void>;
   handleButtonAdd?: VoidFunction;
+  handleButtonOpenDialogEdit?: any;
   handleCloseDialog?: VoidFunction;
   handleTasksTemporary?: any;
   tasksTemporary?: object;
   setTasksTemporary?: any;
   dialog?: RefObject<HTMLHeadingElement>;
+  dialogEdit?: RefObject<HTMLHeadingElement>;
   inputTitleTask?: LegacyRef<HTMLInputElement>;
   inputDescriptionTask?: LegacyRef<HTMLInputElement>;
+  inputTitleTaskEdit?: LegacyRef<HTMLInputElement>;
+  inputDescriptionTaskEdit?: LegacyRef<HTMLInputElement>;
   isActiveDialog?: boolean;
   setIsActiveDialog?: any;
   isAuth?: boolean;
@@ -25,6 +29,7 @@ interface IContext {
   handleTasks?: any;
   tasks?: any;
   fetchTasks?: any;
+  handleUpdateTask?: any;
 }
 
 type ComponentProps = {
@@ -37,6 +42,7 @@ export default function Layout({ children }: ComponentProps) {
   const [isActiveDialog, setIsActiveDialog] = useState<boolean>(false);
   const [tasksTemporary, setTasksTemporary] = useState<Array<object>>([{}]);
   const dialog = useRef<any>(null);
+  const dialogEdit = useRef<any>(null);
   const inputTitleTask = useRef<any>(null);
   const inputDescriptionTask = useRef<any>(null);
 
@@ -67,7 +73,7 @@ export default function Layout({ children }: ComponentProps) {
     fetchTasks();
   }
 
-  const [tasks, setTasks] = useState();
+  const [tasks, setTasks] = useState([]);
 
   async function fetchTasks() {
     const { token }: any = parseCookies();
@@ -79,7 +85,7 @@ export default function Layout({ children }: ComponentProps) {
             authorization: `Bearer ${token}`,
           },
         });
-        setTasks(getTasks.data)
+        setTasks(getTasks.data);
       } catch (error: any) {
         destroyCookie(undefined, 'token');
         toast.error(error.response.data.msg, {
@@ -95,14 +101,18 @@ export default function Layout({ children }: ComponentProps) {
 
     if (token) {
       try {
-        const createTasks = await axios.post('api/tasks', {
-          [inputTitleTask.current.name]: inputTitleTask.current.value,
-          [inputDescriptionTask.current.name]: inputDescriptionTask.current.value,
-        },{
-          headers: {
-            authorization: `Bearer ${token}`,
+        const createTasks = await axios.post(
+          'api/tasks',
+          {
+            [inputTitleTask.current.name]: inputTitleTask.current.value,
+            [inputDescriptionTask.current.name]: inputDescriptionTask.current.value,
           },
-        })
+          {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          }
+        );
         console.log(createTasks);
         fetchTasks();
       } catch (error: any) {
@@ -126,11 +136,56 @@ export default function Layout({ children }: ComponentProps) {
     setIsActiveDialog(true);
   }
 
+  const inputDescriptionTaskEdit = useRef<any>(null);
+  const inputTitleTaskEdit = useRef<any>(null);
+  const [idTasksUpdate, setIdTaskUpdate] = useState<number>();
+
+  function handleButtonOpenDialogEdit(value: any) {
+    inputTitleTaskEdit.current.value = value.title;
+    inputDescriptionTaskEdit.current.value = value.description;
+    setIdTaskUpdate(value._id)
+    dialogEdit.current.showModal();
+    setIsActiveDialog(true);
+  }
+
+  async function handleUpdateTask() {
+    const { token }: any = parseCookies();
+
+    if (token) {
+      try {
+        const updateTask = await axios.put(`api/tasks/${idTasksUpdate}`, {
+            [inputTitleTaskEdit.current.name]: inputTitleTaskEdit.current.value,
+            [inputDescriptionTaskEdit.current.name]: inputDescriptionTaskEdit.current.value,
+          },
+          {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        toast.success(updateTask.data.msg, {
+          theme: 'colored',
+        });
+        console.log(updateTask);
+        fetchTasks();
+      } catch (error: any) {
+        destroyCookie(undefined, 'token');
+        toast.error(error.response.data.msg, {
+          theme: 'colored',
+        });
+        console.log(error);
+      }
+    }
+
+    handleCloseDialog();
+  }
+
   function handleCloseDialog() {
     inputTitleTask.current.value = '';
     inputDescriptionTask.current.value = '';
     setIsActiveDialog(false);
     dialog.current.close();
+    dialogEdit.current?.close();
   }
 
   const [formatDigit, setFormatDigit] = useState<number>(-1);
@@ -166,7 +221,7 @@ export default function Layout({ children }: ComponentProps) {
   function handlePageLoaded() {
     setTimeout(() => {
       setIsActiveLoading(false);
-    }, 2000);
+    }, 2500);
   }
 
   return (
@@ -176,8 +231,10 @@ export default function Layout({ children }: ComponentProps) {
         <Context.Provider
           value={{
             handleButtonAdd,
+            handleButtonOpenDialogEdit,
             handleCloseDialog,
             dialog,
+            dialogEdit,
             isActiveDialog,
             setIsActiveDialog,
             handleTasksTemporary,
@@ -185,12 +242,15 @@ export default function Layout({ children }: ComponentProps) {
             setTasksTemporary,
             inputTitleTask,
             inputDescriptionTask,
+            inputTitleTaskEdit,
+            inputDescriptionTaskEdit,
             isAuth,
             setIsAuth,
             fetchDataUser,
             handleTasks,
             tasks,
-            fetchTasks
+            fetchTasks,
+            handleUpdateTask,
           }}
         >
           <Menu />

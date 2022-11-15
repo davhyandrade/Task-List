@@ -105,6 +105,21 @@ const GlobalStyles = createGlobalStyle<IProps>`
             background-color: rgba(0, 0, 0, 0.5);
           }
         }
+
+        #btn-edit {
+          filter: contrast(0.42);
+          opacity: 100%;
+
+          &:hover {
+            transition: 1s;
+            opacity: 50%;
+          }
+
+          &:active {
+            transition: 0.1s;
+            opacity: 100%;
+          }
+        }
       `}
   `;
 
