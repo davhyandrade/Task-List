@@ -19,7 +19,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/pages/api/tasks.ts",
+    "src/pages/api/tasks/tasks.ts",
     "src/utils/database.ts",
     "src/components/Menu.tsx",
     "src/middleware.ts"

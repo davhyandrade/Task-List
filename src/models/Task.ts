@@ -5,18 +5,13 @@ const taskSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  descrimption: {
+  description: {
     type: String,
     require: true,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-  },
-  tasks: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Task',
-    require: true,
   },
   completed: {
     type: Boolean,
