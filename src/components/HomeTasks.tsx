@@ -10,18 +10,20 @@ export default function HomeTasks() {
 
   return (
     <div className="home-tasks">
-      {!isAuth ? (
-        <>
-          <h1>Entre na sua conta</h1>
-          <span>para acessar ou alterar suas Tarefas</span>
-        </>
-      ) : (
-        <>
-          <h1>Adicione sua primeira</h1>
-          <span>tarefa para o seu dia ser mais produtivo</span>
-        </>
-      )}
-      <Image src="https://i.postimg.cc/8CCJ3pKF/icone-task-list.png" alt="logo tasklist" width={150} height={100} />
+      <div className="initial-field">
+        {!isAuth ? (
+          <>
+            <h1>Entre na sua conta</h1>
+            <span>para acessar ou alterar suas Tarefas</span>
+          </>
+        ) : (
+          <>
+            <h1>Adicione sua primeira</h1>
+            <span>tarefa para o seu dia ser mais produtivo</span>
+          </>
+        )}
+        <Image src="https://i.postimg.cc/8CCJ3pKF/icone-task-list.png" alt="logo tasklist" width={150} height={100} />
+      </div>
       <div className="add-tasks">
         <button onClick={handleButtonAdd} id="button-add" translate="no">
           <img className="img-button-add" src="https://i.postimg.cc/jqQj5YtX/vector-add.png" alt="Vetor Adicionar" />

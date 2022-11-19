@@ -16,32 +16,27 @@
       }
     }
   
-    &:hover {
-      transition: 1s;
-      background: rgba(128, 128, 128, 0.1);
-    }
-    
     .toggle-menu-item {
-      width: 40px;
-      height: 5px;
+      width: 35px;
+      height: 3px;
       background: var(--color-headings);
       transition: all 0.5s ease-in-out;
   
       &::before, &::after {
         content: "";
         position: absolute;
-        width: 40px;
-        height: 5px;
+        width: 35px;
+        height: 3px;
         background: var(--color-headings);
         transition: all 0.5s ease-in-out;
       }
       
       &::before {
-        transform: translateY(-13px);
+        transform: translateY(-10px);
       }
       
       &::after {
-        transform: translateY(13px);
+        transform: translateY(10px);
       } 
     } 
   }

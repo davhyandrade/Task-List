@@ -236,10 +236,16 @@ body #__next section {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+}
+.home-tasks .initial-field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 8vh;
   width: 100%;
 }
-.home-tasks > h1 {
+.home-tasks .initial-field > h1 {
   font-family: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   text-align: center;
   color: var(--color-headings);
@@ -247,12 +253,12 @@ body #__next section {
   line-height: 70px;
 }
 @media only screen and (max-width: 800px) {
-  .home-tasks > h1 {
+  .home-tasks .initial-field > h1 {
     font-size: 2.5rem;
     line-height: 40px;
   }
 }
-.home-tasks > span {
+.home-tasks .initial-field > span {
   text-align: center;
   color: var(--color-headings);
   font-size: 2.8rem;
@@ -263,13 +269,13 @@ body #__next section {
   margin-bottom: 50px;
 }
 @media only screen and (max-width: 800px) {
-  .home-tasks > span {
+  .home-tasks .initial-field > span {
     font-size: 2rem;
     width: 80%;
     line-height: 35px;
   }
 }
-.home-tasks img {
+.home-tasks .initial-field img {
   filter: drop-shadow(10px 8px 8px var(--color-drop-shadow));
 }
 .home-tasks .add-tasks {
@@ -282,6 +288,11 @@ body #__next section {
   height: 250px;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
+}
+@media only screen and (max-width: 800px) {
+  .home-tasks .add-tasks {
+    height: 200px;
+  }
 }
 .home-tasks .add-tasks button {
   filter: drop-shadow(0px 0px 50px var(--color-drop-shadow));
@@ -363,7 +374,7 @@ body #__next section {
 }
 @media only screen and (max-width: 800px) {
   .menu .position {
-    width: 95%;
+    width: 100%;
   }
   .menu .position .logo:nth-child(1) {
     display: none;
@@ -451,8 +462,8 @@ body #__next section {
   margin-top: 70px;
 }
 .menu-mobile .position {
-  width: 80%;
-  margin-top: 100px;
+  width: 100%;
+  margin-top: 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -471,11 +482,11 @@ body #__next section {
   padding: 25px 100px;
   border-radius: 35px;
   background-color: var(--bg-panel-third);
-  font-size: 17px;
+  font-size: 1.4rem;
   color: var(--color-headings);
   opacity: 90%;
   position: absolute;
-  bottom: 20vh;
+  bottom: 15vh;
 }
 .menu-mobile .position a:nth-child(3):hover {
   transition: 1s;
@@ -514,6 +525,7 @@ footer > div:nth-child(1) {
 @media only screen and (max-width: 800px) {
   footer > div:nth-child(1) {
     justify-content: center;
+    height: 400px;
   }
 }
 footer > div:nth-child(1) .position {
@@ -668,7 +680,7 @@ footer > div:nth-child(2) p span {
 }
 @media only screen and (max-width: 800px) {
   .field-speaks .position {
-    width: 90%;
+    width: 100%;
   }
 }
 .field-speaks .position h1 {
@@ -705,7 +717,7 @@ footer > div:nth-child(2) p span {
 }
 @media only screen and (max-width: 800px) {
   .field-info {
-    height: 900px;
+    height: 750px;
   }
 }
 .field-info .position {
@@ -717,12 +729,17 @@ footer > div:nth-child(2) p span {
 }
 @media only screen and (max-width: 800px) {
   .field-info .position {
-    width: 80%;
+    width: 85%;
   }
 }
 .field-info .position > span {
   font-size: 2rem;
   color: var(--color-headings);
+}
+@media only screen and (max-width: 800px) {
+  .field-info .position > span {
+    font-size: 1.5rem;
+  }
 }
 .field-info .position p {
   margin-bottom: 10px;
@@ -731,6 +748,14 @@ footer > div:nth-child(2) p span {
 .field-info .position p > span {
   font-weight: bold;
   font-size: 1.3rem;
+}
+@media only screen and (max-width: 800px) {
+  .field-info .position p {
+    font-size: 1rem;
+  }
+  .field-info .position p > span {
+    font-size: 1.1rem;
+  }
 }
 .field-info .position p:nth-child(4) {
   margin-bottom: 10px;
@@ -756,6 +781,9 @@ footer > div:nth-child(2) p span {
 @media only screen and (max-width: 800px) {
   .field-info .position .field {
     width: 100%;
+  }
+  .field-info .position .field:nth-child(1) {
+    margin-top: 50px;
   }
 }
 .field-info .position .field img {
@@ -1366,29 +1394,25 @@ dialog::backdrop {
     display: flex;
   }
 }
-.menu .position .toggle-menu:hover {
-  transition: 1s;
-  background: rgba(128, 128, 128, 0.1);
-}
 .menu .position .toggle-menu .toggle-menu-item {
-  width: 40px;
-  height: 5px;
+  width: 35px;
+  height: 3px;
   background: var(--color-headings);
   transition: all 0.5s ease-in-out;
 }
 .menu .position .toggle-menu .toggle-menu-item::before, .menu .position .toggle-menu .toggle-menu-item::after {
   content: "";
   position: absolute;
-  width: 40px;
-  height: 5px;
+  width: 35px;
+  height: 3px;
   background: var(--color-headings);
   transition: all 0.5s ease-in-out;
 }
 .menu .position .toggle-menu .toggle-menu-item::before {
-  transform: translateY(-13px);
+  transform: translateY(-10px);
 }
 .menu .position .toggle-menu .toggle-menu-item::after {
-  transform: translateY(13px);
+  transform: translateY(10px);
 }
 .menu .position .active .toggle-menu-item {
   transform: translateX(-50px);

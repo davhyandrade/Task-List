@@ -8,7 +8,7 @@
     filter: drop-shadow(0px 0px 2px var(--color-border));
     border-bottom: 1px solid var(--color-border);
     z-index: 99;
-    
+
     .position {
         width: 85%;
         display: flex;        
@@ -16,7 +16,7 @@
 
         @media only screen and (max-width: 800px) {
             & {
-                width: 95%;
+                width: 100%;
 
                 .logo:nth-child(1) {
                     display: none;
@@ -125,8 +125,8 @@
     margin-top: 70px;
 
     .position {
-        width: 80%;
-        margin-top: 100px;
+        width: 100%;
+        margin-top: 70px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -147,11 +147,11 @@
             padding: 25px 100px;
             border-radius: 35px;
             background-color: var(--bg-panel-third);
-            font-size: 17px;  
+            font-size: 1.4rem;  
             color: var(--color-headings);
             opacity: 90%;
             position: absolute;
-            bottom: 20vh;
+            bottom: 15vh;
             
             &:hover {
                 transition: 1s;
