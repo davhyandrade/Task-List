@@ -106,7 +106,7 @@ body #__next section {
 }
 @media only screen and (max-width: 800px) {
   .section-tasks .field-tasks {
-    width: 85%;
+    width: 90%;
   }
 }
 .section-tasks .field-tasks .header-tasks {
@@ -277,7 +277,7 @@ body #__next section {
 }
 @media only screen and (max-width: 800px) {
   .home-tasks .initial-field {
-    height: 40vh;
+    height: 35vh;
     justify-content: center;
   }
 }
@@ -499,7 +499,7 @@ body #__next section {
 }
 .menu-mobile .position {
   width: 100%;
-  margin-top: 70px;
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -515,7 +515,7 @@ body #__next section {
   color: var(--color-primary);
 }
 .menu-mobile .position a:nth-child(3) {
-  padding: 20px 75px;
+  padding: 15px 75px;
   border-radius: 35px;
   background-color: var(--bg-panel-third);
   font-size: 1.4rem;
@@ -711,7 +711,7 @@ footer > div:nth-child(2) p span {
   }
 }
 .field-speaks .position {
-  max-width: 55%;
+  width: 55%;
   font-family: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
 @media only screen and (max-width: 800px) {
@@ -757,7 +757,7 @@ footer > div:nth-child(2) p span {
   }
 }
 .field-info .position {
-  width: 55%;
+  max-width: 55%;
   font-family: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   color: var(--color-text);
   font-size: 1.15rem;
@@ -765,7 +765,7 @@ footer > div:nth-child(2) p span {
 }
 @media only screen and (max-width: 800px) {
   .field-info .position {
-    width: 85%;
+    max-width: 85%;
   }
 }
 .field-info .position > span {
@@ -1055,11 +1055,6 @@ dialog::backdrop {
   justify-content: center;
   width: 100%;
 }
-@media only screen and (max-width: 800px) {
-  .form-login {
-    min-height: 100vh;
-  }
-}
 .form-login form {
   width: 30%;
   display: flex;
@@ -1069,7 +1064,7 @@ dialog::backdrop {
 }
 @media only screen and (max-width: 800px) {
   .form-login form {
-    width: 80%;
+    width: 85%;
   }
 }
 .form-login form img {
@@ -1231,11 +1226,6 @@ dialog::backdrop {
   justify-content: center;
   width: 100%;
 }
-@media only screen and (max-width: 800px) {
-  .form-register {
-    min-height: 100vh;
-  }
-}
 .form-register form {
   width: 35%;
   display: flex;
@@ -1245,7 +1235,7 @@ dialog::backdrop {
 }
 @media only screen and (max-width: 800px) {
   .form-register form {
-    width: 80%;
+    width: 85%;
   }
 }
 .form-register form img {

@@ -171,20 +171,22 @@ export default function Tasks() {
                 return (
                   <details key={value.id}>
                     <summary id={`${value.completed && 'completed'}`}>
-                      <p>{value.title}</p>
-                      <input
-                        onClick={() => handleButtonDelete(value.id)}
-                        type="image"
-                        src="https://i.postimg.cc/HxPpDGL9/btn-exit.png"
-                        alt="Button close"
-                      />
-                      <input
-                        id="input-image"
-                        onClick={() => handleButtonIsCompleted(value.id)}
-                        type="image"
-                        src={`${value.completed ? imageDone.imageCompleted : imageDone.imagePending}`}
-                        alt="Image Done"
-                      />
+                      <div>
+                        <p>{value.title}</p>
+                        <input
+                          onClick={() => handleButtonDelete(value.id)}
+                          type="image"
+                          src="https://i.postimg.cc/HxPpDGL9/btn-exit.png"
+                          alt="Button close"
+                        />
+                        <input
+                          id="input-image"
+                          onClick={() => handleButtonIsCompleted(value.id)}
+                          type="image"
+                          src={`${value.completed ? imageDone.imageCompleted : imageDone.imagePending}`}
+                          alt="Image Done"
+                        />
+                      </div>
                     </summary>
                     <div className="description-tasks">
                       <p>{value.description}</p>

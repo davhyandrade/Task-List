@@ -193,7 +193,7 @@ export default function Menu() {
   function handleCloseMenuMobile() {
     setTimeout(() => {
       setIsActiveToggleMenu(false);
-    }, 2000);
+    }, 1500);
   }
 
   return (
@@ -244,7 +244,7 @@ export default function Menu() {
       <div className="menu-mobile">
         <div className="position">
           {isAuth ? (
-            <a>Logout</a>
+            <a onClick={handleLogout}>Logout</a>
           ) : (
             <>
               <Link href="/">
@@ -261,5 +261,5 @@ export default function Menu() {
         </div>
       </div>
     </>
-  );
+  );  
 }

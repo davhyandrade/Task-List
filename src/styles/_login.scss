@@ -4,12 +4,6 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  
-  @media only screen and (max-width: 800px) {
-    & {
-      min-height: 100vh;
-    }
-  }
 
   form {
     width: 30%;
@@ -20,7 +14,7 @@
 
     @media only screen and (max-width: 800px) {
       & {
-        width: 80%;
+        width: 85%;
       }
     }
 
