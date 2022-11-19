@@ -1,0 +1,62 @@
+.menu .position {
+  .toggle-menu {
+    position: relative;
+    width: 65px;
+    height: 65px;
+    border-radius: 5px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+  
+    @media only screen and (max-width: 800px) {
+      & {
+        display: flex;
+      }
+    }
+  
+    &:hover {
+      transition: 1s;
+      background: rgba(128, 128, 128, 0.1);
+    }
+    
+    .toggle-menu-item {
+      width: 40px;
+      height: 5px;
+      background: var(--color-headings);
+      transition: all 0.5s ease-in-out;
+  
+      &::before, &::after {
+        content: "";
+        position: absolute;
+        width: 40px;
+        height: 5px;
+        background: var(--color-headings);
+        transition: all 0.5s ease-in-out;
+      }
+      
+      &::before {
+        transform: translateY(-13px);
+      }
+      
+      &::after {
+        transform: translateY(13px);
+      } 
+    } 
+  }
+  
+  .active .toggle-menu-item {
+    transform: translateX(-50px);
+    background: transparent;
+    box-shadow: none;
+  
+    &::before {
+      transform: rotate(45deg) translate(35px, -35px);
+    }
+  
+    &::after {
+      transform: rotate(-45deg) translate(35px, 35px);
+    }
+  } 
+}

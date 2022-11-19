@@ -246,6 +246,12 @@ body #__next section {
   font-size: 4rem;
   line-height: 70px;
 }
+@media only screen and (max-width: 800px) {
+  .home-tasks > h1 {
+    font-size: 2.5rem;
+    line-height: 40px;
+  }
+}
 .home-tasks > span {
   text-align: center;
   color: var(--color-headings);
@@ -255,6 +261,13 @@ body #__next section {
   width: 500px;
   font-weight: normal;
   margin-bottom: 50px;
+}
+@media only screen and (max-width: 800px) {
+  .home-tasks > span {
+    font-size: 2rem;
+    width: 80%;
+    line-height: 35px;
+  }
 }
 .home-tasks img {
   filter: drop-shadow(10px 8px 8px var(--color-drop-shadow));
@@ -323,6 +336,11 @@ body #__next section {
   opacity: 45%;
   text-align: center;
 }
+@media only screen and (max-width: 800px) {
+  .home-tasks .add-tasks p:nth-child(3) {
+    width: 80%;
+  }
+}
 .home-tasks .add-tasks p:nth-child(3) span {
   font-weight: bolder;
 }
@@ -336,11 +354,20 @@ body #__next section {
   align-items: center;
   filter: drop-shadow(0px 0px 2px var(--color-border));
   border-bottom: 1px solid var(--color-border);
+  z-index: 99;
 }
 .menu .position {
   width: 85%;
   display: flex;
   justify-content: space-between;
+}
+@media only screen and (max-width: 800px) {
+  .menu .position {
+    width: 95%;
+  }
+  .menu .position .logo:nth-child(1) {
+    display: none;
+  }
 }
 .menu .position img {
   filter: drop-shadow(2px 4px 6px var(--color-drop-shadow));
@@ -390,6 +417,11 @@ body #__next section {
   background-color: var(--bg-panel-hover);
   opacity: 30%;
 }
+@media only screen and (max-width: 800px) {
+  .menu .position .btns-login {
+    display: none;
+  }
+}
 .menu .position .btns-login > input[type=image] {
   width: 40px;
   opacity: 40%;
@@ -405,6 +437,55 @@ body #__next section {
 .menu .position .btns-login > input[type=image]:active {
   transition: 0.1s;
   opacity: 20%;
+}
+
+.menu-mobile {
+  position: fixed;
+  width: 100%;
+  height: 91vh;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--bg-panel);
+  z-index: 99;
+  margin-top: 70px;
+}
+.menu-mobile .position {
+  width: 80%;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.menu-mobile .position a {
+  text-decoration: none;
+  padding: 30px 40%;
+  font-size: 1.2rem;
+  color: var(--color-text);
+}
+.menu-mobile .position a:hover {
+  transition: 1s;
+  color: var(--color-primary);
+}
+.menu-mobile .position a:nth-child(3) {
+  padding: 25px 100px;
+  border-radius: 35px;
+  background-color: var(--bg-panel-third);
+  font-size: 17px;
+  color: var(--color-headings);
+  opacity: 90%;
+  position: absolute;
+  bottom: 20vh;
+}
+.menu-mobile .position a:nth-child(3):hover {
+  transition: 1s;
+  background-color: var(--bg-panel-hover);
+  opacity: 100%;
+}
+.menu-mobile .position a:nth-child(3):active {
+  transition: 0.1s;
+  background-color: var(--bg-panel-hover);
+  opacity: 30%;
 }
 
 .btn-theme {
@@ -430,6 +511,11 @@ footer > div:nth-child(1) {
   display: flex;
   justify-content: flex-start;
 }
+@media only screen and (max-width: 800px) {
+  footer > div:nth-child(1) {
+    justify-content: center;
+  }
+}
 footer > div:nth-child(1) .position {
   display: flex;
   justify-content: space-between;
@@ -437,6 +523,14 @@ footer > div:nth-child(1) .position {
   margin-top: 80px;
   margin-left: 10%;
   position: relative;
+}
+@media only screen and (max-width: 800px) {
+  footer > div:nth-child(1) .position {
+    width: 90%;
+    margin-left: 0;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
 }
 footer > div:nth-child(1) .position h1 {
   font-weight: normal;
@@ -447,10 +541,23 @@ footer > div:nth-child(1) .position h1 {
   left: 0;
   top: 0;
 }
+@media only screen and (max-width: 800px) {
+  footer > div:nth-child(1) .position h1 {
+    left: 10%;
+  }
+}
 footer > div:nth-child(1) .position > div {
   display: flex;
   flex-direction: column;
   margin-top: 80px;
+}
+@media only screen and (max-width: 800px) {
+  footer > div:nth-child(1) .position > div {
+    width: 35%;
+  }
+  footer > div:nth-child(1) .position > div:nth-child(4) {
+    display: none;
+  }
 }
 footer > div:nth-child(1) .position > div a {
   text-decoration: none;
@@ -506,6 +613,11 @@ footer > div:nth-child(2) > div:nth-child(2) {
   width: 10%;
   margin: 30px 0;
 }
+@media only screen and (max-width: 800px) {
+  footer > div:nth-child(2) > div:nth-child(2) {
+    width: 35%;
+  }
+}
 footer > div:nth-child(2) > div:nth-child(2) img {
   width: 35px;
   cursor: pointer;
@@ -526,6 +638,12 @@ footer > div:nth-child(2) p {
   font-family: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   opacity: 70%;
 }
+@media only screen and (max-width: 800px) {
+  footer > div:nth-child(2) p {
+    width: 65%;
+    text-align: center;
+  }
+}
 footer > div:nth-child(2) p span {
   font-weight: bolder;
 }
@@ -539,9 +657,19 @@ footer > div:nth-child(2) p span {
   background-color: var(--bg-color);
   border-bottom: 1px solid var(--color-border);
 }
+@media only screen and (max-width: 800px) {
+  .field-speaks {
+    height: 300px;
+  }
+}
 .field-speaks .position {
   width: 55%;
   font-family: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+}
+@media only screen and (max-width: 800px) {
+  .field-speaks .position {
+    width: 90%;
+  }
 }
 .field-speaks .position h1 {
   font-size: 2.5rem;
@@ -551,9 +679,20 @@ footer > div:nth-child(2) p span {
   width: 80%;
   margin: 0 auto;
 }
+@media only screen and (max-width: 800px) {
+  .field-speaks .position h1 {
+    font-size: 1.5rem;
+    line-height: 35px;
+  }
+}
 .field-speaks .position h1 span {
   font-weight: normal;
   font-size: 2rem;
+}
+@media only screen and (max-width: 800px) {
+  .field-speaks .position h1 span {
+    font-size: 1.2rem;
+  }
 }
 
 .field-info {
@@ -564,12 +703,22 @@ footer > div:nth-child(2) p span {
   align-items: center;
   background-color: var(--bg-color);
 }
+@media only screen and (max-width: 800px) {
+  .field-info {
+    height: 900px;
+  }
+}
 .field-info .position {
   width: 55%;
   font-family: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   color: var(--color-text);
   font-size: 1.15rem;
   line-height: 30px;
+}
+@media only screen and (max-width: 800px) {
+  .field-info .position {
+    width: 80%;
+  }
 }
 .field-info .position > span {
   font-size: 2rem;
@@ -586,23 +735,41 @@ footer > div:nth-child(2) p span {
 .field-info .position p:nth-child(4) {
   margin-bottom: 10px;
 }
+@media only screen and (max-width: 800px) {
+  .field-info .position p:nth-child(4) {
+    display: none;
+  }
+}
 .field-info .position > div {
   display: flex;
+}
+@media only screen and (max-width: 800px) {
+  .field-info .position > div {
+    display: block;
+  }
 }
 .field-info .position .field {
   display: flex;
   margin-top: 30px;
   width: 50%;
 }
-.field-info .position .field:nth-child(3) {
-  margin-bottom: 40px;
+@media only screen and (max-width: 800px) {
+  .field-info .position .field {
+    width: 100%;
+  }
 }
 .field-info .position .field img {
   width: 55px;
   height: 55px;
 }
 .field-info .position .field:nth-child(3) {
+  margin-bottom: 40px;
   width: 100%;
+}
+@media only screen and (max-width: 800px) {
+  .field-info .position .field:nth-child(3) {
+    display: none;
+  }
 }
 .field-info .position .field:nth-child(3) > div {
   width: 70%;
@@ -1181,4 +1348,56 @@ dialog::backdrop {
   40% {
     box-shadow: 0 2.5em 0 0;
   }
+}
+
+.menu .position .toggle-menu {
+  position: relative;
+  width: 65px;
+  height: 65px;
+  border-radius: 5px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+@media only screen and (max-width: 800px) {
+  .menu .position .toggle-menu {
+    display: flex;
+  }
+}
+.menu .position .toggle-menu:hover {
+  transition: 1s;
+  background: rgba(128, 128, 128, 0.1);
+}
+.menu .position .toggle-menu .toggle-menu-item {
+  width: 40px;
+  height: 5px;
+  background: var(--color-headings);
+  transition: all 0.5s ease-in-out;
+}
+.menu .position .toggle-menu .toggle-menu-item::before, .menu .position .toggle-menu .toggle-menu-item::after {
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 5px;
+  background: var(--color-headings);
+  transition: all 0.5s ease-in-out;
+}
+.menu .position .toggle-menu .toggle-menu-item::before {
+  transform: translateY(-13px);
+}
+.menu .position .toggle-menu .toggle-menu-item::after {
+  transform: translateY(13px);
+}
+.menu .position .active .toggle-menu-item {
+  transform: translateX(-50px);
+  background: transparent;
+  box-shadow: none;
+}
+.menu .position .active .toggle-menu-item::before {
+  transform: rotate(45deg) translate(35px, -35px);
+}
+.menu .position .active .toggle-menu-item::after {
+  transform: rotate(-45deg) translate(35px, 35px);
 }/*# sourceMappingURL=globals.css.map */

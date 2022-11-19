@@ -5,10 +5,10 @@ import { createGlobalStyle } from 'styled-components';
 import { Context } from '../context/layout';
 import { destroyCookie } from 'nookies';
 import { toast } from 'react-toastify';
-import Router from 'next/router';
 
 interface IProps {
   isActiveThemeDarkOrLight: string;
+  isActiveToggleMenu: boolean;
 }
 
 const GlobalStyles = createGlobalStyle<IProps>`
@@ -121,7 +121,17 @@ const GlobalStyles = createGlobalStyle<IProps>`
           }
         }
       `}
-  `;
+  ${(props) => 
+    props.isActiveToggleMenu && 
+    `.menu-mobile {
+      display: flex;
+    }
+
+    .menu {
+      position: fixed;
+    }
+  `}
+`;
 
 export default function Menu() {
   const [isActiveThemeDarkOrLight, setIsActiveThemeDarkOrLight] = useState<string>('light');
@@ -170,13 +180,23 @@ export default function Menu() {
     });
   }
 
+  const [isActiveToggleMenu, setIsActiveToggleMenu] = useState<boolean>(false);
+
+  function toggleMenu() {
+    if(isActiveToggleMenu) {
+      setIsActiveToggleMenu(false);
+    } else {
+      setIsActiveToggleMenu(true);
+    }
+  }
+
   return (
     <>
-      <GlobalStyles isActiveThemeDarkOrLight={isActiveThemeDarkOrLight} />
+      <GlobalStyles isActiveThemeDarkOrLight={isActiveThemeDarkOrLight} isActiveToggleMenu={isActiveToggleMenu} />
       <nav className="menu">
         <div className="position">
           <div>
-            <Image
+            <img
               className="logo"
               src="https://i.postimg.cc/8CCJ3pKF/icone-task-list.png"
               alt="Icone Logo"
@@ -210,8 +230,30 @@ export default function Menu() {
               </>
             )}
           </div>
+          <div onClick={toggleMenu} className={`toggle-menu ${isActiveToggleMenu && 'active'}`} >
+            <div className="toggle-menu-item"></div>
+          </div>
         </div>
       </nav>
+      <div className="menu-mobile">
+        <div className="position">
+          {isAuth ? (
+            <a>Logout</a>
+          ) : (
+            <>
+              <Link href="/">
+                <a translate="no">Home</a>
+              </Link>
+              <Link href="/login">
+                <a>Entrar</a>
+              </Link>
+              <Link href="/register">
+                <a>Cadastrar-se</a>
+              </Link>
+            </>
+          )}
+        </div>
+      </div>
     </>
   );
 }
