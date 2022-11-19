@@ -39,15 +39,9 @@ const GlobalStyles = createGlobalStyle<IProps>`
       }
 
       .section-tasks .field-tasks .body-tasks details summary input[type=image] {
-        &:nth-child(1) {
+        &:nth-child(4) {
           top: 50%;
           right: 110px;
-        }
-  
-        &:nth-child(3) {
-          top: 50%;
-          right: 70px;
-          opacity: 50%;
         }
       }
     `}

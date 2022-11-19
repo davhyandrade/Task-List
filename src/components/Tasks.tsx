@@ -46,7 +46,9 @@ export default function Tasks() {
 
       if (token) {
         try {
-          await axios.put(`api/tasks/${id}`, {
+          await axios.put(
+            `api/tasks/${id}`,
+            {
               completed: isCompleted,
             },
             {
@@ -135,27 +137,29 @@ export default function Tasks() {
                 return (
                   <details key={value._id}>
                     <summary id={`${value.completed && 'completed'}`}>
-                      {value.title}
-                      <input
-                        id="input-image"
-                        onClick={() => handleButtonIsCompleted(value._id)}
-                        type="image"
-                        src={`${value.completed ? imageDone.imageCompleted : imageDone.imagePending}`}
-                        alt="Image Done"
-                      />
-                      <input
-                        onClick={() => handleButtonDelete(value._id)}
-                        type="image"
-                        src="https://i.postimg.cc/HxPpDGL9/btn-exit.png"
-                        alt="Button close"
-                      />
-                      <input
-                        id="btn-edit"
-                        onClick={() => handleButtonOpenDialogEdit(value)}
-                        type="image"
-                        src="https://i.postimg.cc/RVpnFfdm/btn-edijt.png"
-                        alt="Image edit"
-                      />
+                      <div>
+                        <p>{value.title}</p>
+                        <input
+                          onClick={() => handleButtonDelete(value._id)}
+                          type="image"
+                          src="https://i.postimg.cc/HxPpDGL9/btn-exit.png"
+                          alt="Button close"
+                        />
+                        <input
+                          id="btn-edit"
+                          onClick={() => handleButtonOpenDialogEdit(value)}
+                          type="image"
+                          src="https://i.postimg.cc/RVpnFfdm/btn-edijt.png"
+                          alt="Image edit"
+                        />
+                        <input
+                          id="input-image"
+                          onClick={() => handleButtonIsCompleted(value._id)}
+                          type="image"
+                          src={`${value.completed ? imageDone.imageCompleted : imageDone.imagePending}`}
+                          alt="Image Done"
+                        />
+                      </div>
                     </summary>
                     <div className="description-tasks">
                       <p>{value.description}</p>
@@ -167,19 +171,19 @@ export default function Tasks() {
                 return (
                   <details key={value.id}>
                     <summary id={`${value.completed && 'completed'}`}>
-                      {value.title}
+                      <p>{value.title}</p>
+                      <input
+                        onClick={() => handleButtonDelete(value.id)}
+                        type="image"
+                        src="https://i.postimg.cc/HxPpDGL9/btn-exit.png"
+                        alt="Button close"
+                      />
                       <input
                         id="input-image"
                         onClick={() => handleButtonIsCompleted(value.id)}
                         type="image"
                         src={`${value.completed ? imageDone.imageCompleted : imageDone.imagePending}`}
                         alt="Image Done"
-                      />
-                      <input
-                        onClick={() => handleButtonDelete(value.id)}
-                        type="image"
-                        src="https://i.postimg.cc/HxPpDGL9/btn-exit.png"
-                        alt="Button close"
                       />
                     </summary>
                     <div className="description-tasks">

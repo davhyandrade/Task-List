@@ -4,6 +4,12 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  
+  @media only screen and (max-width: 800px) {
+    & {
+      min-height: 100vh;
+    }
+  }
 
   form {
     width: 30%;
@@ -11,6 +17,12 @@
     flex-direction: column;
     align-items: center;
     margin-bottom: 30px;
+
+    @media only screen and (max-width: 800px) {
+      & {
+        width: 80%;
+      }
+    }
 
     img {
       filter: drop-shadow(10px 8px 8px var(--color-drop-shadow));
@@ -33,6 +45,13 @@
       margin-bottom: 60px;
       margin-top: 10px;
       font-size: 1rem;
+      text-align: center;
+
+      @media only screen and (max-width: 800px) {
+        & {
+          font-size: 0.9rem;
+        }
+      }
 
       a {
         text-decoration: none;

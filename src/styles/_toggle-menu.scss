@@ -18,7 +18,7 @@
   
     .toggle-menu-item {
       width: 35px;
-      height: 3px;
+      height: 4px;
       background: var(--color-headings);
       transition: all 0.5s ease-in-out;
   
@@ -26,7 +26,7 @@
         content: "";
         position: absolute;
         width: 35px;
-        height: 3px;
+        height: 4px;
         background: var(--color-headings);
         transition: all 0.5s ease-in-out;
       }

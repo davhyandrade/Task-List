@@ -190,6 +190,12 @@ export default function Menu() {
     }
   }
 
+  function handleCloseMenuMobile() {
+    setTimeout(() => {
+      setIsActiveToggleMenu(false);
+    }, 2000);
+  }
+
   return (
     <>
       <GlobalStyles isActiveThemeDarkOrLight={isActiveThemeDarkOrLight} isActiveToggleMenu={isActiveToggleMenu} />
@@ -242,13 +248,13 @@ export default function Menu() {
           ) : (
             <>
               <Link href="/">
-                <a translate="no">Home</a>
+                <a onClick={handleCloseMenuMobile} translate="no">Home</a>
               </Link>
               <Link href="/login">
-                <a>Entrar</a>
+                <a onClick={handleCloseMenuMobile}>Entrar</a>
               </Link>
               <Link href="/register">
-                <a>Cadastrar-se</a>
+                <a onClick={handleCloseMenuMobile}>Cadastrar-se</a>
               </Link>
             </>
           )}

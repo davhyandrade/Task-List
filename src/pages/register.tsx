@@ -85,7 +85,7 @@ export default function Register() {
           Bem vindo ao <span>TaskList</span>
         </h1>
         <p>
-          Já possui uma conta? <Link href="/login">Entre</Link> então!
+          Já possui uma conta? Então <Link href="/login">Entre</Link>!
         </p>
         <div className="container-input">
           <input ref={inputNome} id="name" name="nome" type="text" placeholder="Email" required />

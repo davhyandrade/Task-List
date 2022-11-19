@@ -30,6 +30,7 @@ interface IContext {
   tasks?: any;
   fetchTasks?: any;
   handleUpdateTask?: any;
+  setIsActiveLoading?: any;
 }
 
 type ComponentProps = {
@@ -251,6 +252,7 @@ export default function Layout({ children }: ComponentProps) {
             tasks,
             fetchTasks,
             handleUpdateTask,
+            setIsActiveLoading,
           }}
         >
           <Menu />

@@ -84,6 +84,12 @@
     height: 450px;
     filter: drop-shadow(0px 0px 3px var(--color-drop-shadow));
   
+    @media only screen and (max-width: 800px) {
+      & {
+        width: 85%;
+      }
+    }
+
     .header-tasks {
       width: 100%;
       height: 30px;
@@ -171,34 +177,63 @@
           border-top: none;
           border-left: 6px solid rgb(157, 157, 157);
           position: relative;
-          
-          input[type='image'] {
-            width: 30px;
-            cursor: pointer;
-            margin: -15px;
-            opacity: 50%;
+
+          div {
+            top: 50%;
+            right: 0;
+            margin: -10px 0;
             position: absolute;
+            width: 96%;
+            display: flex;
+            align-items: center;
             
-            &:nth-child(1) {
-              top: 50%;
-              right: 70px;
+            @media screen and (max-width: 800px){
+              & {
+                width: 90%;
+              }
             }
             
-            &:nth-child(2) {
-              top: 50%;
-              right: 30px;
+            @media screen and (min-width: 801px) and (max-width: 1250px){
+              & {
+                width: 94.5%;
+              }
+            }
+
+            p {
+              width: 45%;
+              text-overflow: ellipsis;
+              white-space: nowrap; 
+              overflow: hidden;
+            }
+  
+            input[type='image'] {
+              width: 30px;
+              cursor: pointer;
+              margin: -15px;
               opacity: 50%;
-            }
-
-            &:hover {
-              transition: 1s;
-              opacity: 100%;
-            }
-
-            &:active {
-              transition: 0.1s;
-              opacity: 30%;
-            }
+              position: absolute;
+              
+              &:nth-child(2) {
+                top: 50%;
+                right: 30px;
+                opacity: 50%;
+              }
+  
+              &:nth-child(3) {
+                top: 50%;
+                right: 70px;
+              }
+  
+              &:hover {
+                transition: 1s;
+                opacity: 100%;
+              }
+  
+              &:active {
+                transition: 0.1s;
+                opacity: 30%;
+              }
+            }  
           }
 
           &:hover {

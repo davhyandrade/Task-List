@@ -104,6 +104,11 @@ body #__next section {
   height: 450px;
   filter: drop-shadow(0px 0px 3px var(--color-drop-shadow));
 }
+@media only screen and (max-width: 800px) {
+  .section-tasks .field-tasks {
+    width: 85%;
+  }
+}
 .section-tasks .field-tasks .header-tasks {
   width: 100%;
   height: 30px;
@@ -184,27 +189,52 @@ body #__next section {
   border-left: 6px solid rgb(157, 157, 157);
   position: relative;
 }
-.section-tasks .field-tasks .body-tasks details summary input[type=image] {
+.section-tasks .field-tasks .body-tasks details summary div {
+  top: 50%;
+  right: 0;
+  margin: -10px 0;
+  position: absolute;
+  width: 96%;
+  display: flex;
+  align-items: center;
+}
+@media screen and (max-width: 800px) {
+  .section-tasks .field-tasks .body-tasks details summary div {
+    width: 90%;
+  }
+}
+@media screen and (min-width: 801px) and (max-width: 1250px) {
+  .section-tasks .field-tasks .body-tasks details summary div {
+    width: 94.5%;
+  }
+}
+.section-tasks .field-tasks .body-tasks details summary div p {
+  width: 45%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.section-tasks .field-tasks .body-tasks details summary div input[type=image] {
   width: 30px;
   cursor: pointer;
   margin: -15px;
   opacity: 50%;
   position: absolute;
 }
-.section-tasks .field-tasks .body-tasks details summary input[type=image]:nth-child(1) {
-  top: 50%;
-  right: 70px;
-}
-.section-tasks .field-tasks .body-tasks details summary input[type=image]:nth-child(2) {
+.section-tasks .field-tasks .body-tasks details summary div input[type=image]:nth-child(2) {
   top: 50%;
   right: 30px;
   opacity: 50%;
 }
-.section-tasks .field-tasks .body-tasks details summary input[type=image]:hover {
+.section-tasks .field-tasks .body-tasks details summary div input[type=image]:nth-child(3) {
+  top: 50%;
+  right: 70px;
+}
+.section-tasks .field-tasks .body-tasks details summary div input[type=image]:hover {
   transition: 1s;
   opacity: 100%;
 }
-.section-tasks .field-tasks .body-tasks details summary input[type=image]:active {
+.section-tasks .field-tasks .body-tasks details summary div input[type=image]:active {
   transition: 0.1s;
   opacity: 30%;
 }
@@ -245,6 +275,12 @@ body #__next section {
   margin-top: 8vh;
   width: 100%;
 }
+@media only screen and (max-width: 800px) {
+  .home-tasks .initial-field {
+    height: 40vh;
+    justify-content: center;
+  }
+}
 .home-tasks .initial-field > h1 {
   font-family: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   text-align: center;
@@ -254,7 +290,7 @@ body #__next section {
 }
 @media only screen and (max-width: 800px) {
   .home-tasks .initial-field > h1 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     line-height: 40px;
   }
 }
@@ -270,7 +306,7 @@ body #__next section {
 }
 @media only screen and (max-width: 800px) {
   .home-tasks .initial-field > span {
-    font-size: 2rem;
+    font-size: 1.8rem;
     width: 80%;
     line-height: 35px;
   }
@@ -470,8 +506,8 @@ body #__next section {
 }
 .menu-mobile .position a {
   text-decoration: none;
-  padding: 30px 40%;
-  font-size: 1.2rem;
+  padding: 30px 45%;
+  font-size: 1.4rem;
   color: var(--color-text);
 }
 .menu-mobile .position a:hover {
@@ -479,7 +515,7 @@ body #__next section {
   color: var(--color-primary);
 }
 .menu-mobile .position a:nth-child(3) {
-  padding: 25px 100px;
+  padding: 20px 75px;
   border-radius: 35px;
   background-color: var(--bg-panel-third);
   font-size: 1.4rem;
@@ -675,7 +711,7 @@ footer > div:nth-child(2) p span {
   }
 }
 .field-speaks .position {
-  width: 55%;
+  max-width: 55%;
   font-family: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
 @media only screen and (max-width: 800px) {
@@ -830,6 +866,12 @@ footer > div:nth-child(2) p span {
   justify-content: center;
   flex-direction: column;
 }
+@media only screen and (max-width: 800px) {
+  .not-found {
+    width: 80%;
+    text-align: center;
+  }
+}
 .not-found h1 {
   font-size: 4rem;
   color: var(--color-primary);
@@ -878,6 +920,12 @@ dialog {
   overflow: hidden;
   border: 1px solid var(--color-border);
   position: relative;
+}
+@media only screen and (max-width: 800px) {
+  dialog {
+    margin: -175px -47.5%;
+    min-width: 95%;
+  }
 }
 dialog .position {
   width: 100%;
@@ -1007,12 +1055,22 @@ dialog::backdrop {
   justify-content: center;
   width: 100%;
 }
+@media only screen and (max-width: 800px) {
+  .form-login {
+    min-height: 100vh;
+  }
+}
 .form-login form {
   width: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 30px;
+}
+@media only screen and (max-width: 800px) {
+  .form-login form {
+    width: 80%;
+  }
 }
 .form-login form img {
   filter: drop-shadow(10px 8px 8px var(--color-drop-shadow));
@@ -1032,6 +1090,12 @@ dialog::backdrop {
   margin-bottom: 60px;
   margin-top: 10px;
   font-size: 1rem;
+  text-align: center;
+}
+@media only screen and (max-width: 800px) {
+  .form-login form > p {
+    font-size: 0.9rem;
+  }
 }
 .form-login form > p a {
   text-decoration: none;
@@ -1167,12 +1231,22 @@ dialog::backdrop {
   justify-content: center;
   width: 100%;
 }
+@media only screen and (max-width: 800px) {
+  .form-register {
+    min-height: 100vh;
+  }
+}
 .form-register form {
   width: 35%;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 30px;
+}
+@media only screen and (max-width: 800px) {
+  .form-register form {
+    width: 80%;
+  }
 }
 .form-register form img {
   filter: drop-shadow(10px 8px 8px var(--color-drop-shadow));
@@ -1182,16 +1256,28 @@ dialog::backdrop {
   color: var(--color-headings);
   font-weight: normal;
   margin-top: 20px;
+  text-align: center;
+}
+@media only screen and (max-width: 800px) {
+  .form-register form h1 {
+    font-size: 1.5rem;
+  }
 }
 .form-register form h1 span {
   font-weight: bolder;
   font-size: 2.2rem;
+}
+@media only screen and (max-width: 800px) {
+  .form-register form h1 span {
+    font-size: 1.7rem;
+  }
 }
 .form-register form > p {
   color: var(--color-text);
   margin-bottom: 60px;
   margin-top: 10px;
   font-size: 1rem;
+  text-align: center;
 }
 .form-register form > p a {
   text-decoration: none;
@@ -1318,7 +1404,7 @@ dialog::backdrop {
   height: 100vh;
   background: var(--bg-color);
   position: fixed;
-  z-index: 99;
+  z-index: 999;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1396,7 +1482,7 @@ dialog::backdrop {
 }
 .menu .position .toggle-menu .toggle-menu-item {
   width: 35px;
-  height: 3px;
+  height: 4px;
   background: var(--color-headings);
   transition: all 0.5s ease-in-out;
 }
@@ -1404,7 +1490,7 @@ dialog::backdrop {
   content: "";
   position: absolute;
   width: 35px;
-  height: 3px;
+  height: 4px;
   background: var(--color-headings);
   transition: all 0.5s ease-in-out;
 }
