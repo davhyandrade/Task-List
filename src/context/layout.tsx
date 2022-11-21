@@ -133,6 +133,7 @@ export default function Layout({ children }: ComponentProps) {
   }, []);
 
   function handleButtonAdd() {
+    window.scrollTo(0, 0)
     dialog.current.showModal();
     setIsActiveDialog(true);
   }
@@ -142,6 +143,7 @@ export default function Layout({ children }: ComponentProps) {
   const [idTasksUpdate, setIdTaskUpdate] = useState<number>();
 
   function handleButtonOpenDialogEdit(value: any) {
+    window.scrollTo(0, 0);
     inputTitleTaskEdit.current.value = value.title;
     inputDescriptionTaskEdit.current.value = value.description;
     setIdTaskUpdate(value._id)

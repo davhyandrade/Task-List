@@ -95,6 +95,11 @@ body #__next section {
   opacity: 45%;
   text-align: center;
 }
+@media only screen and (max-width: 800px) {
+  .section-tasks .add-tasks p:nth-child(3) {
+    width: 80%;
+  }
+}
 .section-tasks .field-tasks {
   width: 65%;
   display: flex;
@@ -106,7 +111,7 @@ body #__next section {
 }
 @media only screen and (max-width: 800px) {
   .section-tasks .field-tasks {
-    width: 90%;
+    width: 95%;
   }
 }
 .section-tasks .field-tasks .header-tasks {
@@ -260,6 +265,11 @@ body #__next section {
   opacity: 60%;
   width: 55%;
   text-align: center;
+}
+@media only screen and (max-width: 800px) {
+  .section-tasks > p {
+    display: none;
+  }
 }
 
 .home-tasks {
@@ -707,7 +717,7 @@ footer > div:nth-child(2) p span {
 }
 @media only screen and (max-width: 800px) {
   .field-speaks {
-    height: 300px;
+    height: 400px;
   }
 }
 .field-speaks .position {

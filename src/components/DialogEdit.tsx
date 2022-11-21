@@ -34,10 +34,9 @@ export default function DialogEdit({ dialog }: any) {
             <label htmlFor="description-task">Descrição</label>
           </div>
           <input type="submit" value="Finalizar Alteração" />
-          <input
+          <img
             onClick={handleCloseDialog}
             id="btn-close"
-            type="image"
             src="https://i.postimg.cc/prSVPYvN/btn-close.png"
             alt="button close"
           />

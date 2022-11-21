@@ -72,6 +72,12 @@
       color: var(--color-text);
       opacity: 45%;
       text-align: center;
+
+      @media only screen and (max-width: 800px) {
+        & {
+          width: 80%;
+        }
+      }
     }
   }
 
@@ -86,7 +92,7 @@
   
     @media only screen and (max-width: 800px) {
       & {
-        width: 90%;
+        width: 95%;
       }
     }
 
@@ -264,5 +270,11 @@
     opacity: 60%;
     width: 55%;
     text-align: center;
+
+    @media only screen and (max-width: 800px) {
+      & {
+        display: none;
+      }
+    }
   }
 }
