@@ -10,5 +10,5 @@ Que é basicamente uma to-do list com sistema de login, que foquei no design da 
 
 # Desenvolvimento
 
-Desenvolvido pelo NextJS, Typescrit, Sass e Banco de Dados não relacional MongoDB, ao qual foi trabalhado array de objetos para criar as tarefas, além do sistema de login com token jwt, media query e local storage.
+Desenvolvido pelo NextJS, Typescript, Sass e Banco de Dados não relacional MongoDB, ao qual foi trabalhado array de objetos para criar as tarefas, além do sistema de login com token jwt, media query e local storage.
 
