@@ -1,3 +1,9 @@
+<div align="right">
+  <sub>Create in</sub>  
+  
+  `28/10/2022`
+</div>
+
 # Lista de Afazeres
 
 > Status: Development
