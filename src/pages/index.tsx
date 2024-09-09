@@ -37,13 +37,6 @@ const GlobalStyles = createGlobalStyle<IProps>`
       body #__next section .section-tasks {
         height: 780px;
       }
-
-      .section-tasks .field-tasks .body-tasks details summary input[type=image] {
-        &:nth-child(4) {
-          top: 50%;
-          right: 110px;
-        }
-      }
     `}
 `;
 

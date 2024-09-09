@@ -145,9 +145,10 @@
         }
       }
 
-      img {
+      svg {
         width: 55px;
         height: 55px;
+        fill: var(--color-primary);
       }
       
       &:nth-child(3) {

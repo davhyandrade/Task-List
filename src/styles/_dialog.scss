@@ -16,7 +16,7 @@ dialog {
       min-width: 95%;
     }
   }
-  
+
   .position {
     width: 100%;
     height: 300px;
@@ -28,7 +28,8 @@ dialog {
     form {
       width: 85%;
 
-      #btn-close {
+      #close-button {
+        padding: 10px;
         width: 35px;
         position: absolute;
         top: 15px;
@@ -36,6 +37,10 @@ dialog {
         cursor: pointer;
         opacity: 60%;
         border-radius: 7px;
+        color: red;
+        background-color: transparent;
+        filter: brightness(0.7);
+        border: none;
 
         &:hover {
           transition: 1s;
@@ -46,6 +51,12 @@ dialog {
         &:active {
           transition: 0.1s;
           opacity: 20%;
+        }
+
+        svg {
+          width: 100%;
+          height: 100%;
+          fill: currentColor;
         }
       }
 
@@ -78,12 +89,12 @@ dialog {
           font-size: 1rem;
           background-color: var(--bg-panel);
           color: var(--color-headings);
-          
+
           & + label {
             transform: translateY(-20px);
             font-size: 0.9rem;
           }
-          
+
           &:placeholder-shown + label {
             transform: translateY(0);
             font-size: 1rem;
@@ -107,7 +118,7 @@ dialog {
         }
       }
 
-      input[type="submit"] {  
+      input[type='submit'] {
         width: 100%;
         background-color: var(--color-primary);
         padding: 10px;

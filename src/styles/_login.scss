@@ -18,16 +18,24 @@
       }
     }
 
-    img {
+    > svg {
       filter: drop-shadow(10px 8px 8px var(--color-drop-shadow));
+
+      .gray-vector {
+        fill: #4d616d;
+      }
+
+      .light-gray-vector {
+        fill: #b8c0c5;
+      }
     }
-    
+
     h1 {
       font-size: 2rem;
       color: var(--color-headings);
       font-weight: normal;
       margin-top: 20px;
-      
+
       span {
         font-weight: bolder;
         font-size: 2.2rem;
@@ -58,7 +66,7 @@
           opacity: 50%;
           text-decoration: underline;
         }
-        
+
         &:active {
           transition: 0.1s;
           opacity: 100%;
@@ -66,18 +74,18 @@
         }
       }
     }
-    
+
     > div {
       display: flex;
       flex-direction: column;
       justify-content: center;
       position: relative;
       width: 100%;
-      
+
       &:nth-child(4) {
         margin-bottom: 45px;
       }
-    
+
       label {
         position: absolute;
         top: 0;
@@ -93,12 +101,12 @@
         font-size: 1rem;
         background-color: var(--bg-color);
         color: var(--color-headings);
-        
+
         & + label {
           transform: translateY(-20px);
           font-size: 0.9rem;
         }
-        
+
         &:placeholder-shown + label {
           transform: translateY(0);
           font-size: 1rem;
@@ -121,8 +129,9 @@
         }
       }
 
-      img {
+      button[type='button'] {
         width: 30px;
+        height: 30px;
         position: absolute;
         right: 0;
         top: 0;
@@ -130,10 +139,20 @@
         cursor: pointer;
         border-radius: 20px;
         opacity: 70%;
+        color: var(--color-text);
+        background-color: transparent;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         &:hover {
           transition: 1s;
           background: rgba(255, 255, 255, 0.1);
+        }
+
+        svg {
+          fill: currentColor;
         }
       }
     }
@@ -153,7 +172,7 @@
       }
     }
 
-    input[type="submit"] {  
+    input[type='submit'] {
       width: 100%;
       background-color: var(--color-primary);
       padding: 10px;

@@ -13,13 +13,19 @@
     margin-bottom: 30px;
 
     @media only screen and (max-width: 800px) {
-      & {
-        width: 85%;
-      }
+      width: 85%;
     }
 
-    img {
+    svg {
       filter: drop-shadow(10px 8px 8px var(--color-drop-shadow));
+       
+      .gray-vector {
+        fill: #4d616d;
+      }
+
+      .light-gray-vector {
+        fill: #b8c0c5;
+      }
     }
     
     h1 {
@@ -135,8 +141,9 @@
         }
       }
 
-      img {
+      button[type="button"] {
         width: 30px;
+        height: 30px;
         position: absolute;
         right: 0;
         top: 0;
@@ -144,10 +151,20 @@
         cursor: pointer;
         border-radius: 20px;
         opacity: 70%;
+        background-color: transparent;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-text);
 
         &:hover {
           transition: 1s;
           background: rgba(255, 255, 255, 0.1);
+        }
+
+        svg {
+          fill: currentColor;
         }
       }
     }

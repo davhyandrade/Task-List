@@ -1,9 +1,10 @@
-* {
+@charset "UTF-8";
+*:not(svg *) {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
-  transition: 0.5s;
+  transition: 1s all;
 }
 
 html {
@@ -41,7 +42,8 @@ body #__next section {
   height: 200px;
   border-bottom: 1px solid var(--color-border);
 }
-.section-tasks .add-tasks button {
+.section-tasks .add-tasks button[type=submit],
+.section-tasks .add-tasks .button-pattern {
   filter: drop-shadow(0px 0px 50px var(--color-drop-shadow));
   display: flex;
   align-items: center;
@@ -57,27 +59,27 @@ body #__next section {
   background-color: transparent;
   border: 2px solid var(--color-primary);
 }
-.section-tasks .add-tasks button .img-button-add {
+.section-tasks .add-tasks button[type=submit] .add-button-icon,
+.section-tasks .add-tasks .button-pattern .add-button-icon {
   margin-right: 10px;
   width: 22px;
+  fill: currentColor;
 }
-.section-tasks .add-tasks button:hover {
+.section-tasks .add-tasks button[type=submit]:hover,
+.section-tasks .add-tasks .button-pattern:hover {
   transition: 1s;
   background-color: var(--color-primary);
   color: white;
 }
-.section-tasks .add-tasks button:hover .img-button-add {
-  transition: 1s;
-  filter: brightness(0) grayscale(1) invert(1);
-}
-.section-tasks .add-tasks button:active {
+.section-tasks .add-tasks button[type=submit]:active,
+.section-tasks .add-tasks .button-pattern:active {
   transition: 0.1s;
   background-color: transparent;
   color: var(--color-primary);
 }
-.section-tasks .add-tasks button:active .img-button-add {
-  transition: 0.1s;
-  filter: none;
+.section-tasks .add-tasks button[type=submit]:active .add-button-icon,
+.section-tasks .add-tasks .button-pattern:active .add-button-icon {
+  transition: 0.1s !important;
 }
 .section-tasks .add-tasks p:nth-child(2) {
   margin-top: 20px;
@@ -174,17 +176,25 @@ body #__next section {
   border-left: 6px solid var(--color-tasks);
   background: var(--bg-tasks-title);
 }
+.section-tasks .field-tasks .body-tasks details[open] summary::before {
+  transform: rotate(90deg);
+}
 .section-tasks .field-tasks .body-tasks details[open] .description-tasks {
   background: var(--bg-tasks);
 }
 .section-tasks .field-tasks .body-tasks details #completed {
   border-left: 6px solid var(--color-primary);
+}
+.section-tasks .field-tasks .body-tasks details #completed p {
   text-decoration: line-through;
 }
-.section-tasks .field-tasks .body-tasks details #completed input[type=image]:nth-child(1) {
+.section-tasks .field-tasks .body-tasks details #completed button[type=button]:nth-child(1) {
   opacity: 100%;
+  color: var(--color-primary);
 }
 .section-tasks .field-tasks .body-tasks details summary {
+  display: flex;
+  align-items: center;
   padding: 20px;
   min-height: 65px;
   width: 100%;
@@ -192,56 +202,71 @@ body #__next section {
   border: 1px solid var(--color-border);
   border-top: none;
   border-left: 6px solid rgb(157, 157, 157);
-  position: relative;
 }
-.section-tasks .field-tasks .body-tasks details summary div {
-  top: 50%;
-  right: 0;
-  margin: -10px 0;
-  position: absolute;
-  width: 96%;
+.section-tasks .field-tasks .body-tasks details summary::before {
+  content: "▶";
+  margin-right: 0.7rem;
+  font-size: 0.8em;
+  transform: rotate(0deg);
+  transition: transform 0.3s ease;
+}
+.section-tasks .field-tasks .body-tasks details summary > div {
+  width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 @media screen and (max-width: 800px) {
-  .section-tasks .field-tasks .body-tasks details summary div {
+  .section-tasks .field-tasks .body-tasks details summary > div {
     width: 90%;
   }
 }
 @media screen and (min-width: 801px) and (max-width: 1250px) {
-  .section-tasks .field-tasks .body-tasks details summary div {
+  .section-tasks .field-tasks .body-tasks details summary > div {
     width: 94.5%;
   }
 }
-.section-tasks .field-tasks .body-tasks details summary div p {
-  width: 45%;
+.section-tasks .field-tasks .body-tasks details summary > div p {
+  max-width: 45%;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
-.section-tasks .field-tasks .body-tasks details summary div input[type=image] {
-  width: 30px;
+.section-tasks .field-tasks .body-tasks details summary > div > div:nth-last-child(1) {
+  width: auto;
+  display: flex;
+  gap: 20px;
+}
+.section-tasks .field-tasks .body-tasks details summary > div > div:nth-last-child(1) button[type=button] {
+  background-color: transparent;
+  display: flex;
+  border: none;
+  width: 25px;
   cursor: pointer;
-  margin: -15px;
-  opacity: 50%;
-  position: absolute;
-}
-.section-tasks .field-tasks .body-tasks details summary div input[type=image]:nth-child(2) {
-  top: 50%;
-  right: 30px;
   opacity: 50%;
 }
-.section-tasks .field-tasks .body-tasks details summary div input[type=image]:nth-child(3) {
-  top: 50%;
-  right: 70px;
+.section-tasks .field-tasks .body-tasks details summary > div > div:nth-last-child(1) button[type=button]:nth-last-child(1) {
+  color: red;
+  filter: brightness(0.7);
 }
-.section-tasks .field-tasks .body-tasks details summary div input[type=image]:hover {
+.section-tasks .field-tasks .body-tasks details summary > div > div:nth-last-child(1) button[type=button]:nth-child(2) {
+  opacity: 50%;
+}
+.section-tasks .field-tasks .body-tasks details summary > div > div:nth-last-child(1) button[type=button]:nth-child(1) {
+  color: var(--color-text);
+}
+.section-tasks .field-tasks .body-tasks details summary > div > div:nth-last-child(1) button[type=button]:hover {
   transition: 1s;
   opacity: 100%;
 }
-.section-tasks .field-tasks .body-tasks details summary div input[type=image]:active {
+.section-tasks .field-tasks .body-tasks details summary > div > div:nth-last-child(1) button[type=button]:active {
   transition: 0.1s;
   opacity: 30%;
+}
+.section-tasks .field-tasks .body-tasks details summary > div > div:nth-last-child(1) button[type=button] svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
 }
 .section-tasks .field-tasks .body-tasks details summary:hover {
   transition: 1s;
@@ -321,8 +346,16 @@ body #__next section {
     line-height: 35px;
   }
 }
-.home-tasks .initial-field img {
+.home-tasks .initial-field svg {
+  width: 150px;
+  height: 80px;
   filter: drop-shadow(10px 8px 8px var(--color-drop-shadow));
+}
+.home-tasks .initial-field svg .gray-vector {
+  fill: #4d616d;
+}
+.home-tasks .initial-field svg .light-gray-vector {
+  fill: #b8c0c5;
 }
 .home-tasks .add-tasks {
   display: flex;
@@ -355,27 +388,24 @@ body #__next section {
   border: 2px solid var(--color-primary);
   background-color: transparent;
 }
-.home-tasks .add-tasks button .img-button-add {
+.home-tasks .add-tasks button .add-button-icon {
   margin-right: 10px;
   width: 22px;
+  fill: currentColor;
+  transition: 1ms all;
 }
 .home-tasks .add-tasks button:hover {
   transition: 1s;
   background-color: var(--color-primary);
   color: white;
 }
-.home-tasks .add-tasks button:hover .img-button-add {
-  transition: 1s;
-  filter: brightness(0) grayscale(1) invert(1);
-}
 .home-tasks .add-tasks button:active {
   transition: 0.1s;
   background-color: transparent;
   color: var(--color-primary);
 }
-.home-tasks .add-tasks button:active .img-button-add {
-  transition: 0.1s;
-  filter: none;
+.home-tasks .add-tasks button:active .add-button-icon {
+  transition: 0.1s !important;
 }
 .home-tasks .add-tasks p:nth-child(2) {
   margin-top: 20px;
@@ -426,29 +456,42 @@ body #__next section {
     display: none;
   }
 }
-.menu .position img {
-  filter: drop-shadow(2px 4px 6px var(--color-drop-shadow));
-}
-.menu .position hr {
-  background: var(--color-border);
-  width: 1px;
-  height: 45px;
-  margin: 0 10px 0 20px;
-  border: none;
-  border-radius: 15px;
-}
 .menu .position > div {
   display: flex;
   align-items: center;
 }
+.menu .position > div > div:nth-child(1) {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.menu .position > div > div:nth-child(1) svg {
+  filter: drop-shadow(2px 4px 6px var(--color-drop-shadow));
+}
+.menu .position > div > div:nth-child(1) svg .gray-vector {
+  fill: #4d616d;
+}
+.menu .position > div > div:nth-child(1) svg .light-gray-vector {
+  fill: #b8c0c5;
+}
+.menu .position > div hr {
+  background: var(--color-border);
+  width: 1px;
+  height: 45px;
+  margin: 0 5px 0 30px;
+  border: none;
+  border-radius: 15px;
+}
 .menu .position > div a {
   text-decoration: none;
 }
-.menu .position > div a:nth-child(1), .menu .position > div a:nth-child(2) {
+.menu .position > div a:nth-child(1),
+.menu .position > div a:nth-child(2) {
   font-size: 1rem;
   color: var(--color-text);
 }
-.menu .position > div a:nth-child(1):hover, .menu .position > div a:nth-child(2):hover {
+.menu .position > div a:nth-child(1):hover,
+.menu .position > div a:nth-child(2):hover {
   transition: 1s;
   color: var(--color-primary);
 }
@@ -475,25 +518,34 @@ body #__next section {
   opacity: 30%;
 }
 @media only screen and (max-width: 800px) {
-  .menu .position .btns-login {
+  .menu .position .login-buttons {
     display: none;
   }
 }
-.menu .position .btns-login > input[type=image] {
+.menu .position .login-buttons > button[type=button] {
   width: 40px;
   opacity: 40%;
   margin-right: 20px;
   border-radius: 5px;
   padding: 5px;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-headings);
 }
-.menu .position .btns-login > input[type=image]:hover {
+.menu .position .login-buttons > button[type=button]:hover {
   transition: 1s;
   opacity: 60%;
   background: rgba(128, 128, 128, 0.1);
 }
-.menu .position .btns-login > input[type=image]:active {
+.menu .position .login-buttons > button[type=button]:active {
   transition: 0.1s;
   opacity: 20%;
+}
+.menu .position .login-buttons > button[type=button] svg {
+  fill: currentColor;
 }
 
 .menu-mobile {
@@ -545,17 +597,27 @@ body #__next section {
   opacity: 30%;
 }
 
-.btn-theme {
+.theme-button {
   margin-left: 5px;
   width: 40px;
-  padding: 7px;
+  padding: 8px;
   border-radius: 5px;
   filter: drop-shadow(2px 4px 6px var(--color-drop-shadow));
   opacity: 60%;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-headings);
+  cursor: pointer;
 }
-.btn-theme:hover {
+.theme-button:hover {
   transition: 1s;
   background: rgba(128, 128, 128, 0.1);
+}
+.theme-button svg {
+  fill: currentColor;
 }
 
 footer {
@@ -676,16 +738,17 @@ footer > div:nth-child(2) > div:nth-child(2) {
     width: 35%;
   }
 }
-footer > div:nth-child(2) > div:nth-child(2) img {
-  width: 35px;
+footer > div:nth-child(2) > div:nth-child(2) svg {
+  width: 30px;
   cursor: pointer;
   opacity: 70%;
+  fill: white;
 }
-footer > div:nth-child(2) > div:nth-child(2) img:hover {
+footer > div:nth-child(2) > div:nth-child(2) svg:hover {
   transition: 1s;
   opacity: 100;
 }
-footer > div:nth-child(2) > div:nth-child(2) img:active {
+footer > div:nth-child(2) > div:nth-child(2) svg:active {
   transition: 0.1s;
   opacity: 20%;
 }
@@ -832,9 +895,10 @@ footer > div:nth-child(2) p span {
     margin-top: 50px;
   }
 }
-.field-info .position .field img {
+.field-info .position .field svg {
   width: 55px;
   height: 55px;
+  fill: var(--color-primary);
 }
 .field-info .position .field:nth-child(3) {
   margin-bottom: 40px;
@@ -948,7 +1012,8 @@ dialog .position {
 dialog .position form {
   width: 85%;
 }
-dialog .position form #btn-close {
+dialog .position form #close-button {
+  padding: 10px;
   width: 35px;
   position: absolute;
   top: 15px;
@@ -956,15 +1021,24 @@ dialog .position form #btn-close {
   cursor: pointer;
   opacity: 60%;
   border-radius: 7px;
+  color: red;
+  background-color: transparent;
+  filter: brightness(0.7);
+  border: none;
 }
-dialog .position form #btn-close:hover {
+dialog .position form #close-button:hover {
   transition: 1s;
   background-color: rgba(0, 0, 0, 0.1);
   opacity: 100%;
 }
-dialog .position form #btn-close:active {
+dialog .position form #close-button:active {
   transition: 0.1s;
   opacity: 20%;
+}
+dialog .position form #close-button svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
 }
 dialog .position form h1 {
   font-size: 1.8rem;
@@ -1002,18 +1076,11 @@ dialog .position form > div input:-moz-placeholder-shown + label {
   transform: translateY(0);
   font-size: 1rem;
 }
-dialog .position form > div input:-ms-input-placeholder + label {
-  transform: translateY(0);
-  font-size: 1rem;
-}
 dialog .position form > div input:placeholder-shown + label {
   transform: translateY(0);
   font-size: 1rem;
 }
 dialog .position form > div input::-moz-placeholder {
-  visibility: hidden;
-}
-dialog .position form > div input:-ms-input-placeholder {
   visibility: hidden;
 }
 dialog .position form > div input::placeholder {
@@ -1051,9 +1118,6 @@ dialog .position form input[type=submit]:active {
   background-color: var(--color-primary);
   color: var(--color);
 }
-dialog::-webkit-backdrop {
-  background: rgba(0, 0, 0, 0.6);
-}
 dialog::backdrop {
   background: rgba(0, 0, 0, 0.6);
 }
@@ -1077,8 +1141,14 @@ dialog::backdrop {
     width: 85%;
   }
 }
-.form-login form img {
+.form-login form > svg {
   filter: drop-shadow(10px 8px 8px var(--color-drop-shadow));
+}
+.form-login form > svg .gray-vector {
+  fill: #4d616d;
+}
+.form-login form > svg .light-gray-vector {
+  fill: #b8c0c5;
 }
 .form-login form h1 {
   font-size: 2rem;
@@ -1151,18 +1221,11 @@ dialog::backdrop {
   transform: translateY(0);
   font-size: 1rem;
 }
-.form-login form > div input:-ms-input-placeholder + label {
-  transform: translateY(0);
-  font-size: 1rem;
-}
 .form-login form > div input:placeholder-shown + label {
   transform: translateY(0);
   font-size: 1rem;
 }
 .form-login form > div input::-moz-placeholder {
-  visibility: hidden;
-}
-.form-login form > div input:-ms-input-placeholder {
   visibility: hidden;
 }
 .form-login form > div input::placeholder {
@@ -1178,8 +1241,9 @@ dialog::backdrop {
   font-size: 0.9rem;
   color: var(--color-primary);
 }
-.form-login form > div img {
+.form-login form > div button[type=button] {
   width: 30px;
+  height: 30px;
   position: absolute;
   right: 0;
   top: 0;
@@ -1187,10 +1251,19 @@ dialog::backdrop {
   cursor: pointer;
   border-radius: 20px;
   opacity: 70%;
+  color: var(--color-text);
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.form-login form > div img:hover {
+.form-login form > div button[type=button]:hover {
   transition: 1s;
   background: rgba(255, 255, 255, 0.1);
+}
+.form-login form > div button[type=button] svg {
+  fill: currentColor;
 }
 .form-login form > a {
   margin-top: 25px;
@@ -1248,8 +1321,14 @@ dialog::backdrop {
     width: 85%;
   }
 }
-.form-register form img {
+.form-register form svg {
   filter: drop-shadow(10px 8px 8px var(--color-drop-shadow));
+}
+.form-register form svg .gray-vector {
+  fill: #4d616d;
+}
+.form-register form svg .light-gray-vector {
+  fill: #b8c0c5;
 }
 .form-register form h1 {
   font-size: 2rem;
@@ -1334,18 +1413,11 @@ dialog::backdrop {
   transform: translateY(0);
   font-size: 1rem;
 }
-.form-register form .container-input input:-ms-input-placeholder + label {
-  transform: translateY(0);
-  font-size: 1rem;
-}
 .form-register form .container-input input:placeholder-shown + label {
   transform: translateY(0);
   font-size: 1rem;
 }
 .form-register form .container-input input::-moz-placeholder {
-  visibility: hidden;
-}
-.form-register form .container-input input:-ms-input-placeholder {
   visibility: hidden;
 }
 .form-register form .container-input input::placeholder {
@@ -1361,8 +1433,9 @@ dialog::backdrop {
   font-size: 0.9rem;
   color: var(--color-primary);
 }
-.form-register form .container-input img {
+.form-register form .container-input button[type=button] {
   width: 30px;
+  height: 30px;
   position: absolute;
   right: 0;
   top: 0;
@@ -1370,10 +1443,19 @@ dialog::backdrop {
   cursor: pointer;
   border-radius: 20px;
   opacity: 70%;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text);
 }
-.form-register form .container-input img:hover {
+.form-register form .container-input button[type=button]:hover {
   transition: 1s;
   background: rgba(255, 255, 255, 0.1);
+}
+.form-register form .container-input button[type=button] svg {
+  fill: currentColor;
 }
 .form-register form input[type=submit] {
   width: 100%;
@@ -1419,9 +1501,7 @@ dialog::backdrop {
   border-radius: 50%;
   width: 2em;
   height: 2em;
-  -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
-  -webkit-animation: load7 1.8s infinite ease-in-out;
   animation: load7 1.8s infinite ease-in-out;
 }
 .field-loader .field .loader {
@@ -1431,7 +1511,6 @@ dialog::backdrop {
   position: relative;
   text-indent: -9999em;
   transform: translateZ(0);
-  -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
 }
 .field-loader .field .loader:before, .field-loader .field .loader:after {
@@ -1441,19 +1520,10 @@ dialog::backdrop {
 }
 .field-loader .field .loader:before {
   left: -3.5em;
-  -webkit-animation-delay: -0.32s;
   animation-delay: -0.32s;
 }
 .field-loader .field .loader:after {
   left: 3.5em;
-}
-@-webkit-keyframes load7 {
-  0%, 80%, 100% {
-    box-shadow: 0 2.5em 0 -1.3em;
-  }
-  40% {
-    box-shadow: 0 2.5em 0 0;
-  }
 }
 @keyframes load7 {
   0%, 80%, 100% {

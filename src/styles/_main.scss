@@ -1,10 +1,11 @@
-* {
+*:not(svg *) {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
-    transition: 0.5s;
+    transition: 1s all;
 }
+
 
 html {
     scroll-behavior: smooth;

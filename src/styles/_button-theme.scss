@@ -1,13 +1,25 @@
-.btn-theme {
-    margin-left: 5px;
-    width: 40px;
-    padding: 7px;
-    border-radius: 5px;
-    filter: drop-shadow(2px 4px 6px var(--color-drop-shadow));
-    opacity: 60%;
-    
-    &:hover {
-        transition: 1s;
-        background: rgba(128, 128, 128, 0.1);
-    }
+.theme-button {
+  margin-left: 5px;
+  width: 40px;
+  padding: 8px;
+  border-radius: 5px;
+  filter: drop-shadow(2px 4px 6px var(--color-drop-shadow));
+  opacity: 60%;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-headings);
+  
+  cursor: pointer;
+
+  &:hover {
+    transition: 1s;
+    background: rgba(128, 128, 128, 0.1);
+  }
+
+  svg {
+    fill: currentColor;
+  }
 }
