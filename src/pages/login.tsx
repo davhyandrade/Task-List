@@ -1,10 +1,10 @@
 import axios from 'axios';
 import Link from 'next/link';
 import Router from 'next/router';
-import { FormEvent, useContext, useRef, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 import { setCookie } from 'nookies';
-import { Context } from '../context/layout';
 import { toast } from 'react-toastify';
+import { useGlobalContext } from '@/context/layout';
 
 export default function Login() {
   const inputEmail = useRef<any>(null);
@@ -55,7 +55,7 @@ export default function Login() {
 
   const [isActiveButtonSubmit, setIsActiveButtonSubmit] = useState<boolean>(false);
 
-  const { fetchDataUser, setIsActiveLoading }: any = useContext(Context);
+  const { fetchDataUser, setIsActiveLoading }: any = useGlobalContext();
 
   async function handleLoginUser(event: FormEvent) {
     event.preventDefault();

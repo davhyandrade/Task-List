@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
-import { Context } from '../context/layout';
+import { useGlobalContext } from '@/context/layout';
 import { destroyCookie } from 'nookies';
 import { toast } from 'react-toastify';
 
@@ -218,8 +218,7 @@ export default function Menu() {
     }
   }, []);
 
-  const { isAuth } = useContext(Context);
-  const { setIsAuth } = useContext(Context);
+  const { isAuth, setIsAuth } = useGlobalContext();
 
   function handleLogout() {
     destroyCookie(undefined, 'token');

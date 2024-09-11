@@ -5,6 +5,7 @@ import {
   ReactNode,
   RefObject,
   SetStateAction,
+  useContext,
   useEffect,
   useRef,
   useState,
@@ -19,44 +20,74 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../components/Loader';
 
+interface ITasks {
+  _id: string;
+  title: string;
+  description: string;
+  user: string;
+  completed: boolean;
+  createAt: Date;
+}
+
+interface IEditModal {
+  title: string;
+  description: string;
+  _id: number;
+}
+
+interface ITasksTemporary {
+  id: number;
+  completed: boolean;
+}
+
 interface IContext {
-  fetchDataUser?: () => Promise<void>;
-  handleButtonAdd?: VoidFunction;
-  handleButtonOpenDialogEdit?: any;
-  handleCloseDialog?: VoidFunction;
-  handleTasksTemporary?: any;
-  tasksTemporary?: any;
-  setTasksTemporary?: any;
-  dialog?: RefObject<HTMLHeadingElement>;
-  dialogEdit?: RefObject<HTMLHeadingElement>;
-  inputTitleTask?: LegacyRef<HTMLInputElement>;
-  inputDescriptionTask?: LegacyRef<HTMLInputElement>;
-  inputTitleTaskEdit?: LegacyRef<HTMLInputElement>;
-  inputDescriptionTaskEdit?: LegacyRef<HTMLInputElement>;
-  isActiveDialog?: boolean;
-  setIsActiveDialog?: any;
-  isAuth?: boolean;
-  setIsAuth?: any;
-  handleTasks?: any;
-  tasks?: any;
-  fetchTasks?: any;
-  handleUpdateTask?: any;
-  setIsActiveLoading?: Dispatch<SetStateAction<boolean>>;
+  fetchDataUser: () => Promise<void>;
+  handleButtonAdd: VoidFunction;
+  handleButtonOpenEditModal: (value: IEditModal) => void;
+  handleCloseDialog: VoidFunction;
+  handleTasksTemporary: () => void;
+  tasksTemporary: ITasksTemporary[];
+  setTasksTemporary: Dispatch<SetStateAction<ITasksTemporary[]>>;
+  dialog: RefObject<HTMLDialogElement>;
+  editModal: RefObject<HTMLDialogElement>;
+  inputTitleTask: LegacyRef<HTMLInputElement>;
+  inputDescriptionTask: LegacyRef<HTMLInputElement>;
+  inputTitleTaskEdit: LegacyRef<HTMLInputElement>;
+  inputDescriptionTaskEdit: LegacyRef<HTMLInputElement>;
+  isActiveDialog: boolean;
+  setIsActiveDialog: Dispatch<SetStateAction<boolean>>;
+  isAuth: boolean;
+  setIsAuth: Dispatch<SetStateAction<boolean>>;
+  handleTasks: VoidFunction;
+  tasks: ITasks[];
+  fetchTasks: () => Promise<void>;
+  handleUpdateTask: VoidFunction;
+  setIsActiveLoading: Dispatch<SetStateAction<boolean>>;
+}
+
+export const GlobalContext = createContext<IContext | undefined>(undefined);
+
+export function useGlobalContext(): IContext {
+  const globalContext = useContext(GlobalContext);
+
+  if (!globalContext) {
+    throw new Error("GlobalContext must be used within a ContextProvider")
+  }
+
+  return globalContext;
 }
 
 type ComponentProps = {
   children: ReactNode;
 };
 
-export const Context = createContext<IContext>({});
-
 export default function Layout({ children }: ComponentProps) {
   const [isActiveDialog, setIsActiveDialog] = useState<boolean>(false);
-  const [tasksTemporary, setTasksTemporary] = useState<Array<object>>([{}]);
-  const dialog = useRef<any>(null);
-  const dialogEdit = useRef<any>(null);
-  const inputTitleTask = useRef<any>(null);
-  const inputDescriptionTask = useRef<any>(null);
+  const [tasksTemporary, setTasksTemporary] = useState<ITasksTemporary[]>([]);
+  const dialog = useRef<HTMLDialogElement>(null);
+  const editModal = useRef<HTMLDialogElement>(null);
+  const inputTitleTask = useRef<HTMLInputElement>(null);
+  const inputDescriptionTask = useRef<HTMLInputElement>(null);
 
   const [user, setUser] = useState<object | null>(null);
 
@@ -74,7 +105,7 @@ export default function Layout({ children }: ComponentProps) {
             authorization: `Bearer ${token}`,
           },
         });
-        setUser(requestUser);
+        setUser(requestUser.data);
         setIsAuth(true);
       } catch (error: any) {
         if (error.status === 400 || error.status === 401) destroyCookie(undefined, 'token');
@@ -90,7 +121,7 @@ export default function Layout({ children }: ComponentProps) {
     }
   }
 
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<ITasks[]>([]);
 
   async function fetchTasks() {
     const { token }: any = parseCookies();
@@ -127,8 +158,8 @@ export default function Layout({ children }: ComponentProps) {
         const createTasks = await axios.post(
           'api/tasks',
           {
-            [inputTitleTask.current.name]: inputTitleTask.current.value,
-            [inputDescriptionTask.current.name]: inputDescriptionTask.current.value,
+            [inputTitleTask.current?.name || '']: inputTitleTask.current?.value || '',
+            [inputDescriptionTask.current?.name || '']: inputDescriptionTask.current?.value || '',
           },
           {
             headers: {
@@ -158,35 +189,35 @@ export default function Layout({ children }: ComponentProps) {
 
   function handleButtonAdd() {
     window.scrollTo(0, 0);
-    dialog.current.showModal();
+    dialog.current?.showModal();
     setIsActiveDialog(true);
   }
 
-  const inputDescriptionTaskEdit = useRef<any>(null);
-  const inputTitleTaskEdit = useRef<any>(null);
-  const [idTasksUpdate, setIdTaskUpdate] = useState<number>();
+  const inputDescriptionTaskEdit = useRef<HTMLInputElement>(null);
+  const inputTitleTaskEdit = useRef<HTMLInputElement>(null);
+  const [idTasksUpdate, setIdTaskUpdate] = useState<number | undefined>();
 
-  function handleButtonOpenDialogEdit(value: any) {
+  function handleButtonOpenEditModal(value: IEditModal) {
     window.scrollTo(0, 0);
-    inputTitleTaskEdit.current.value = value.title;
-    inputDescriptionTaskEdit.current.value = value.description;
+    inputTitleTaskEdit.current!.value = value.title;
+    inputDescriptionTaskEdit.current!.value = value.description;
     setIdTaskUpdate(value._id);
-    dialogEdit.current.showModal();
+    editModal.current?.showModal();
     setIsActiveDialog(true);
   }
 
   async function handleUpdateTask() {
     const { token }: any = parseCookies();
 
-    if (token) {
+    if (token && idTasksUpdate) {
       setIsActiveLoading(true);
 
       try {
         const updateTask = await axios.put(
           `api/tasks/${idTasksUpdate}`,
           {
-            [inputTitleTaskEdit.current.name]: inputTitleTaskEdit.current.value,
-            [inputDescriptionTaskEdit.current.name]: inputDescriptionTaskEdit.current.value,
+            [inputTitleTaskEdit.current?.name || '']: inputTitleTaskEdit.current?.value || '',
+            [inputDescriptionTaskEdit.current?.name || '']: inputDescriptionTaskEdit.current?.value || '',
           },
           {
             headers: {
@@ -214,11 +245,11 @@ export default function Layout({ children }: ComponentProps) {
   }
 
   function handleCloseDialog() {
-    inputTitleTask.current.value = '';
-    inputDescriptionTask.current.value = '';
+    if (inputTitleTask.current) inputTitleTask.current.value = '';
+    if (inputDescriptionTask.current) inputDescriptionTask.current.value = '';
     setIsActiveDialog(false);
-    dialog.current.close();
-    dialogEdit.current?.close();
+    dialog.current?.close();
+    editModal.current?.close();
   }
 
   const [formatDigit, setFormatDigit] = useState<number>(-1);
@@ -230,12 +261,12 @@ export default function Layout({ children }: ComponentProps) {
 
     setFormatDigit(-quantCaracteres);
 
-    const task = new Object({
-      [inputTitleTask.current.name]: inputTitleTask.current.value,
-      [inputDescriptionTask.current.name]: inputDescriptionTask.current.value,
+    const task = {
+      [inputTitleTask.current?.name || '']: inputTitleTask.current?.value || '',
+      [inputDescriptionTask.current?.name || '']: inputDescriptionTask.current?.value || '',
       id: number,
       completed: false,
-    });
+    };
 
     setTasksTemporary((prevData) => [...prevData, task]);
 
@@ -270,19 +301,19 @@ export default function Layout({ children }: ComponentProps) {
       setIsActiveLoading(false);
     }
   }, [isPending]);
-  
+
   return (
     <>
       {isActiveLoading ? (
         <Loader />
       ) : (
-        <Context.Provider
+        <GlobalContext.Provider
           value={{
             handleButtonAdd,
-            handleButtonOpenDialogEdit,
+            handleButtonOpenEditModal,
             handleCloseDialog,
             dialog,
-            dialogEdit,
+            editModal,
             isActiveDialog,
             setIsActiveDialog,
             handleTasksTemporary,
@@ -306,7 +337,7 @@ export default function Layout({ children }: ComponentProps) {
           <section>{children}</section>
           <Footer />
           <ToastContainer />
-        </Context.Provider>
+        </GlobalContext.Provider>
       )}
     </>
   );

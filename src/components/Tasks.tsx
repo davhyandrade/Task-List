@@ -1,7 +1,7 @@
-import { useContext, useState, useTransition } from 'react';
-import { Context } from '../context/layout';
+import { useState } from 'react';
+import { useGlobalContext } from '@/context/layout';
 import Dialog from './Dialog';
-import DialogEdit from './DialogEdit';
+import EditModal from './EditModal';
 import axios from 'axios';
 import { destroyCookie, parseCookies } from 'nookies';
 import { toast } from 'react-toastify';
@@ -15,7 +15,16 @@ export default function Tasks() {
     completed: boolean;
   }
 
-  const { handleButtonAdd, handleButtonOpenDialogEdit, dialog, dialogEdit, tasksTemporary, tasks, isAuth, setIsActiveLoading }: any = useContext(Context);
+  const {
+    handleButtonAdd,
+    handleButtonOpenEditModal,
+    dialog,
+    editModal,
+    tasksTemporary,
+    tasks,
+    isAuth,
+    setIsActiveLoading,
+  }: any = useGlobalContext();
 
   const taskStatusIcon = {
     pending: (
@@ -138,9 +147,7 @@ export default function Tasks() {
     }
   }
 
-  const { setTasksTemporary } = useContext(Context);
-
-  const { fetchTasks } = useContext(Context);
+  const { setTasksTemporary, fetchTasks } = useGlobalContext();
 
   async function handleButtonDelete(id: any) {
     const { token }: any = parseCookies();
@@ -223,7 +230,7 @@ export default function Tasks() {
                           <button onClick={() => handleButtonIsCompleted(value._id)} type="button">
                             {value.completed ? taskStatusIcon.completed : taskStatusIcon.pending}
                           </button>
-                          <button id="btn-edit" onClick={() => handleButtonOpenDialogEdit(value)} type="button">
+                          <button id="btn-edit" onClick={() => handleButtonOpenEditModal(value)} type="button">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 376.87 376.89">
                               <defs>
                                 <style>.cls-1{'fill:#040404;'}</style>
@@ -320,7 +327,7 @@ export default function Tasks() {
                 );
               })}
         </div>
-        <DialogEdit dialog={dialogEdit} />
+        <EditModal dialog={editModal} />
       </div>
       {!isAuth && (
         <p>

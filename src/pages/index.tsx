@@ -1,10 +1,9 @@
-import { useContext } from 'react';
 import type { NextPage } from 'next';
 import { createGlobalStyle } from 'styled-components';
 import Tasks from '../components/Tasks';
 import HomeTasks from '../components/HomeTasks';
 import InfoField from '../components/InfoField';
-import { Context } from '../context/layout';
+import { useGlobalContext } from '@/context/layout';
 
 interface IProps {
   quantTasks: number;
@@ -40,10 +39,7 @@ const GlobalStyles = createGlobalStyle<IProps>`
 `;
 
 const Home: NextPage = () => {
-  const { isActiveDialog } = useContext(Context);
-  const { tasksTemporary }: any = useContext(Context);
-  const { isAuth } = useContext(Context);
-  const { tasks } = useContext(Context);
+  const { isActiveDialog, tasksTemporary, isAuth, tasks } = useGlobalContext();
 
   const quantTasks = tasks?.length;
 

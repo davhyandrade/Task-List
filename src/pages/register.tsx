@@ -1,12 +1,12 @@
-import { Context } from '@/context/layout';
+import { useGlobalContext } from '@/context/layout';
 import axios from 'axios';
 import Link from 'next/link';
 import Router from 'next/router';
-import { FormEvent, useContext, useRef, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 
 export default function Register() {
-  const { setIsActiveLoading }: any = useContext(Context);
+  const { setIsActiveLoading }: any = useGlobalContext();
   
   const inputNome = useRef<any>(null);
   const inputEmail = useRef<any>(null);

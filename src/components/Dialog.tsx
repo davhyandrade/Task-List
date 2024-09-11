@@ -1,15 +1,12 @@
-import { FormEvent, useContext } from 'react';
-import { Context } from '../context/layout';
+import { FormEvent } from 'react';
+import { useGlobalContext } from '@/context/layout';
 
 export default function Dialog({ dialog }: any) {
-  const { handleCloseDialog, handleTasksTemporary, inputDescriptionTask, inputTitleTask } = useContext(Context);
+  const { handleCloseDialog, handleTasksTemporary, inputDescriptionTask, inputTitleTask, isAuth, handleTasks, setIsActiveDialog } = useGlobalContext();
 
   function handleForm(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
   }
-
-  const { isAuth } = useContext(Context);
-  const { handleTasks } = useContext(Context);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     handleForm(event);
@@ -19,8 +16,6 @@ export default function Dialog({ dialog }: any) {
       handleTasksTemporary();
     }
   }
-
-  const { setIsActiveDialog } = useContext(Context);
 
   function handleKeyPressDialog(event: any) {
     if (event.key === 'Escape') {

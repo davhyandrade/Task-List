@@ -1,11 +1,8 @@
-import { useContext } from 'react';
 import Dialog from '../components/Dialog';
-import { Context } from '../context/layout';
+import { useGlobalContext } from '../context/layout';
 
 export default function HomeTasks() {
-  const { handleButtonAdd } = useContext(Context);
-  const { dialog } = useContext(Context);
-  const { isAuth } = useContext(Context);
+  const { handleButtonAdd, dialog, isAuth } = useGlobalContext();
 
   return (
     <div className="home-tasks">

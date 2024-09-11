@@ -1,18 +1,13 @@
-import { FormEvent, useContext } from 'react';
-import { Context } from '../context/layout';
+import { FormEvent} from 'react';
+import { useGlobalContext } from '../context/layout';
 
-export default function DialogEdit({ dialog }: any) {
-  const { handleCloseDialog } = useContext(Context);
-  const { handleUpdateTask } = useContext(Context);
-  const { inputDescriptionTaskEdit } = useContext(Context);
-  const { inputTitleTaskEdit } = useContext(Context);
+export default function EditModal({ dialog }: any) {
+  const { handleCloseDialog, handleUpdateTask, inputDescriptionTaskEdit, inputTitleTaskEdit, setIsActiveDialog } = useGlobalContext();
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     handleUpdateTask();
   }
-
-  const { setIsActiveDialog } = useContext(Context);
 
   function handleKeyPressDialog(event: any) {
     if (event.key === 'Escape') {

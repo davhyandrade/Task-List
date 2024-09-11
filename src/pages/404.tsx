@@ -1,9 +1,9 @@
 import Router from 'next/router';
-import { useContext, useEffect } from 'react';
-import { Context } from '../context/layout';
+import { useEffect } from 'react';
+import { useGlobalContext } from '../context/layout';
 
 export default function NotFoud() {
-  const { setIsActiveLoading } = useContext(Context);
+  const { setIsActiveLoading } = useGlobalContext();
 
   useEffect(() => {
     setIsActiveLoading(false);
