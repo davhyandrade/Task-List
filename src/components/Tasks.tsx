@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useTransition } from 'react';
 import { Context } from '../context/layout';
 import Dialog from './Dialog';
 import DialogEdit from './DialogEdit';
@@ -15,13 +15,7 @@ export default function Tasks() {
     completed: boolean;
   }
 
-  const { handleButtonAdd } = useContext(Context);
-  const { handleButtonOpenDialogEdit } = useContext(Context);
-  const { dialog } = useContext(Context);
-  const { dialogEdit } = useContext(Context);
-  const { tasksTemporary }: any = useContext(Context);
-  const { tasks }: any = useContext(Context);
-  const { isAuth }: any = useContext(Context);
+  const { handleButtonAdd, handleButtonOpenDialogEdit, dialog, dialogEdit, tasksTemporary, tasks, isAuth, setIsActiveLoading }: any = useContext(Context);
 
   const taskStatusIcon = {
     pending: (
@@ -72,10 +66,6 @@ export default function Tasks() {
         throw new Error("O valor de 'id' é indefinido.");
       }
 
-      if (typeof id !== 'number') {
-        throw new Error("O 'id' deve ser um número.");
-      }
-
       if (isAuth) {
         const task = tasks.filter((value: any) => value._id === id);
 
@@ -97,6 +87,8 @@ export default function Tasks() {
           throw new Error('Token não encontrado.');
         }
 
+        setIsActiveLoading(true);
+
         try {
           await axios.put(
             `api/tasks/${id}`,
@@ -109,13 +101,15 @@ export default function Tasks() {
           );
           fetchTasks();
         } catch (error: any) {
-          destroyCookie(undefined, 'token');
+          if (error.status === 400 || error.status === 401) destroyCookie(undefined, 'token');
           if (error.response && error.response.data && error.response.data.msg) {
             toast.error(error.response.data.msg, { theme: 'colored' });
           } else {
             toast.error('Erro ao atualizar a tarefa.', { theme: 'colored' });
           }
           console.error(error);
+        } finally {
+          setIsActiveLoading(false);
         }
       } else {
         if (typeof tasksTemporary[id] === 'undefined') {
@@ -152,12 +146,26 @@ export default function Tasks() {
     const { token }: any = parseCookies();
 
     if (isAuth) {
-      await axios.delete(`api/tasks/${id}`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      });
-      fetchTasks();
+      setIsActiveLoading(true);
+
+      try {
+        await axios.delete(`api/tasks/${id}`, {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
+        fetchTasks();
+      } catch (error: any) {
+        if (error.status === 400 || error.status === 401) destroyCookie(undefined, 'token');
+        if (error.response && error.response.data && error.response.data.msg) {
+          toast.error(error.response.data.msg, { theme: 'colored' });
+        } else {
+          toast.error('Erro ao apagar a tarefa.', { theme: 'colored' });
+        }
+        console.error(error);
+      } finally {
+        setIsActiveLoading(false);
+      }
     } else {
       setTasksTemporary(tasksTemporary.filter((value: any) => value.id !== id));
       tasksTemporary.forEach((element: any) => {

@@ -1,4 +1,15 @@
-import { createContext, Dispatch, LegacyRef, ReactNode, RefObject, useEffect, useId, useRef, useState } from 'react';
+import {
+  createContext,
+  Dispatch,
+  LegacyRef,
+  ReactNode,
+  RefObject,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+  useTransition,
+} from 'react';
 import Menu from '../components/Menu';
 import Footer from '../components/Footer';
 import { destroyCookie, parseCookies } from 'nookies';
@@ -14,7 +25,7 @@ interface IContext {
   handleButtonOpenDialogEdit?: any;
   handleCloseDialog?: VoidFunction;
   handleTasksTemporary?: any;
-  tasksTemporary?: object;
+  tasksTemporary?: any;
   setTasksTemporary?: any;
   dialog?: RefObject<HTMLHeadingElement>;
   dialogEdit?: RefObject<HTMLHeadingElement>;
@@ -30,7 +41,7 @@ interface IContext {
   tasks?: any;
   fetchTasks?: any;
   handleUpdateTask?: any;
-  setIsActiveLoading?: any;
+  setIsActiveLoading?: Dispatch<SetStateAction<boolean>>;
 }
 
 type ComponentProps = {
@@ -55,6 +66,8 @@ export default function Layout({ children }: ComponentProps) {
     const { token }: any = parseCookies();
 
     if (token) {
+      setIsActiveLoading(true);
+
       try {
         const requestUser = await axios.get(`/api/auth/user/${(jwt.decode(token) as any).id}`, {
           headers: {
@@ -64,14 +77,17 @@ export default function Layout({ children }: ComponentProps) {
         setUser(requestUser);
         setIsAuth(true);
       } catch (error: any) {
-        destroyCookie(undefined, 'token');
+        if (error.status === 400 || error.status === 401) destroyCookie(undefined, 'token');
         toast.error(error.response.data.msg, {
           theme: 'colored',
         });
         console.log(error);
+      } finally {
+        setIsActiveLoading(false);
       }
+
+      fetchTasks();
     }
-    fetchTasks();
   }
 
   const [tasks, setTasks] = useState([]);
@@ -80,6 +96,8 @@ export default function Layout({ children }: ComponentProps) {
     const { token }: any = parseCookies();
 
     if (token) {
+      setIsActiveLoading(true);
+
       try {
         const getTasks = await axios.get('/api/tasks', {
           headers: {
@@ -88,11 +106,13 @@ export default function Layout({ children }: ComponentProps) {
         });
         setTasks(getTasks.data);
       } catch (error: any) {
-        destroyCookie(undefined, 'token');
+        if (error.status === 400 || error.status === 401) destroyCookie(undefined, 'token');
         toast.error(error.response.data.msg, {
           theme: 'colored',
         });
         console.log(error);
+      } finally {
+        setIsActiveLoading(false);
       }
     }
   }
@@ -101,6 +121,8 @@ export default function Layout({ children }: ComponentProps) {
     const { token }: any = parseCookies();
 
     if (token) {
+      setIsActiveLoading(true);
+
       try {
         const createTasks = await axios.post(
           'api/tasks',
@@ -117,11 +139,13 @@ export default function Layout({ children }: ComponentProps) {
         console.log(createTasks);
         fetchTasks();
       } catch (error: any) {
-        destroyCookie(undefined, 'token');
+        if (error.status === 400 || error.status === 401) destroyCookie(undefined, 'token');
         toast.error(error.response.data.msg, {
           theme: 'colored',
         });
         console.log(error);
+      } finally {
+        setIsActiveLoading(false);
       }
     }
 
@@ -133,7 +157,7 @@ export default function Layout({ children }: ComponentProps) {
   }, []);
 
   function handleButtonAdd() {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
     dialog.current.showModal();
     setIsActiveDialog(true);
   }
@@ -146,7 +170,7 @@ export default function Layout({ children }: ComponentProps) {
     window.scrollTo(0, 0);
     inputTitleTaskEdit.current.value = value.title;
     inputDescriptionTaskEdit.current.value = value.description;
-    setIdTaskUpdate(value._id)
+    setIdTaskUpdate(value._id);
     dialogEdit.current.showModal();
     setIsActiveDialog(true);
   }
@@ -155,8 +179,12 @@ export default function Layout({ children }: ComponentProps) {
     const { token }: any = parseCookies();
 
     if (token) {
+      setIsActiveLoading(true);
+
       try {
-        const updateTask = await axios.put(`api/tasks/${idTasksUpdate}`, {
+        const updateTask = await axios.put(
+          `api/tasks/${idTasksUpdate}`,
+          {
             [inputTitleTaskEdit.current.name]: inputTitleTaskEdit.current.value,
             [inputDescriptionTaskEdit.current.name]: inputDescriptionTaskEdit.current.value,
           },
@@ -172,11 +200,13 @@ export default function Layout({ children }: ComponentProps) {
         console.log(updateTask);
         fetchTasks();
       } catch (error: any) {
-        destroyCookie(undefined, 'token');
+        if (error.status === 400 || error.status === 401) destroyCookie(undefined, 'token');
         toast.error(error.response.data.msg, {
           theme: 'colored',
         });
         console.log(error);
+      } finally {
+        setIsActiveLoading(false);
       }
     }
 
@@ -214,23 +244,38 @@ export default function Layout({ children }: ComponentProps) {
     handleCloseDialog();
   }
 
-  const [isActiveLoading, setIsActiveLoading] = useState<boolean>(true);
-  const [isVisiblePage, setIsVisibleP] = useState<boolean>(false);
+  const [isPending, startTransition] = useTransition();
+
+  const [isVisiblePage, setIsVisiblePage] = useState<boolean>(false);
+  const [isActiveLoading, setIsActiveLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsVisibleP(true);
-  });
-
-  function handlePageLoaded() {
     setTimeout(() => {
-      setIsActiveLoading(false);
-    }, 2500);
-  }
+      setIsVisiblePage(true);
+    }, 3000);
+  }, []);
 
+  useEffect(() => {
+    if (!isVisiblePage) {
+      setIsActiveLoading(true);
+    } else {
+      setIsActiveLoading(false);
+    }
+  }, [isVisiblePage]);
+
+  useEffect(() => {
+    if (isPending) {
+      setIsActiveLoading(true);
+    } else {
+      setIsActiveLoading(false);
+    }
+  }, [isPending]);
+  
   return (
     <>
-      {isActiveLoading && <Loader />}
-      {isVisiblePage && (
+      {isActiveLoading ? (
+        <Loader />
+      ) : (
         <Context.Provider
           value={{
             handleButtonAdd,
@@ -258,7 +303,7 @@ export default function Layout({ children }: ComponentProps) {
           }}
         >
           <Menu />
-          <section onLoad={handlePageLoaded}>{children}</section>
+          <section>{children}</section>
           <Footer />
           <ToastContainer />
         </Context.Provider>

@@ -1,10 +1,13 @@
+import { Context } from '@/context/layout';
 import axios from 'axios';
 import Link from 'next/link';
 import Router from 'next/router';
-import { FormEvent, useRef, useState } from 'react';
+import { FormEvent, useContext, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 
 export default function Register() {
+  const { setIsActiveLoading }: any = useContext(Context);
+  
   const inputNome = useRef<any>(null);
   const inputEmail = useRef<any>(null);
   const inputSenha = useRef<any>(null);
@@ -75,6 +78,8 @@ export default function Register() {
   async function handleRegisterUser(event: FormEvent) {
     event.preventDefault();
     setIsActiveButtonSubmit(true);
+    setIsActiveLoading(true);
+
     try {
       const user = await axios.post('/api/auth/register', {
         name: inputNome.current.value,
@@ -94,6 +99,8 @@ export default function Register() {
       });
       setIsActiveButtonSubmit(false);
       console.log(error.message);
+    } finally {
+      setIsActiveLoading(false);
     }
   }
 

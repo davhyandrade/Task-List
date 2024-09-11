@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import type { NextPage } from 'next';
-import axios from 'axios';
 import { createGlobalStyle } from 'styled-components';
 import Tasks from '../components/Tasks';
 import HomeTasks from '../components/HomeTasks';

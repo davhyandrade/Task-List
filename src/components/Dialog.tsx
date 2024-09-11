@@ -2,10 +2,7 @@ import { FormEvent, useContext } from 'react';
 import { Context } from '../context/layout';
 
 export default function Dialog({ dialog }: any) {
-  const { handleCloseDialog } = useContext(Context);
-  const { handleTasksTemporary } = useContext(Context);
-  const { inputDescriptionTask } = useContext(Context);
-  const { inputTitleTask } = useContext(Context);
+  const { handleCloseDialog, handleTasksTemporary, inputDescriptionTask, inputTitleTask } = useContext(Context);
 
   function handleForm(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();

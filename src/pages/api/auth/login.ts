@@ -3,7 +3,6 @@ import { connectDatabase } from '../../../utils/database';
 import bcrypt from 'bcrypt';
 import User from '../../../models/User';
 import jwt from 'jsonwebtoken';
-import axios from 'axios';
 
 const SECRET: any = process.env.SECRET;
 

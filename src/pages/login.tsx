@@ -55,11 +55,13 @@ export default function Login() {
 
   const [isActiveButtonSubmit, setIsActiveButtonSubmit] = useState<boolean>(false);
 
-  const { fetchDataUser }: any = useContext(Context);
+  const { fetchDataUser, setIsActiveLoading }: any = useContext(Context);
 
   async function handleLoginUser(event: FormEvent) {
     event.preventDefault();
     setIsActiveButtonSubmit(true);
+    setIsActiveLoading(true);
+
     try {
       const user = await axios.post('/api/auth/login', {
         email: inputEmail.current.value,
@@ -80,6 +82,8 @@ export default function Login() {
         theme: 'colored',
       });
       setIsActiveButtonSubmit(false);
+    } finally {
+      setIsActiveLoading(false);
     }
   }
 
